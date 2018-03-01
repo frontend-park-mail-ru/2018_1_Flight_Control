@@ -34,7 +34,7 @@
 
 		doPost({url = '/', callback = noop, data = {}} = {}) {
 			const xhr = new XMLHttpRequest();
-			xhr.open('POST', url, true);
+			xhr.open('POST', 'https://super-frontend.herokuapp.com/register', true);
 
 			xhr.onreadystatechange = function () {
 				if (xhr.readyState != 4) {
