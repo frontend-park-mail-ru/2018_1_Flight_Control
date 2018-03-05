@@ -32,9 +32,9 @@
 			xhr.send();
 		}
 
-		doPost({url = '/', callback = noop, data = {}} = {}) {
+		doPost({url, callback = noop, data = {}} = {}) {
 			const xhr = new XMLHttpRequest();
-			xhr.open('POST', 'https://flightcontrol.herokuapp.com/api/user/register', true);
+			xhr.open('POST', url, true);
 
 			xhr.onreadystatechange = function () {
 				if (xhr.readyState != 4) {

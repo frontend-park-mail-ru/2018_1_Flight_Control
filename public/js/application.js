@@ -58,7 +58,7 @@ function onSubmitSigninForm(evt) {
 			return;
 		}
 
-		checkAuth();
+		//checkAuth();
 		openSection('menu');
 	});
 }
@@ -145,7 +145,7 @@ function loadMe(callback) {
 
 function signupUser(user, callback) {
 	httpModule.doPost({
-		url: '/signup',
+		url: 'https://flightcontrol.herokuapp.com/api/user/register',
 		callback,
 		data: user
 	});
@@ -153,7 +153,7 @@ function signupUser(user, callback) {
 
 function loginUser(user, callback) {
 	httpModule.doPost({
-		url: '/login',
+		url: 'https://flightcontrol.herokuapp.com/api/user/authenticate',
 		callback,
 		data: user
 	});
@@ -166,7 +166,7 @@ function checkAuth() {
 			return;
 		}
 
-		console.log('me is', me);
+		//console.log('me is', me);
 		subheader.textContent = `Привет, ${me.email}!!!`;
 	});
 }
