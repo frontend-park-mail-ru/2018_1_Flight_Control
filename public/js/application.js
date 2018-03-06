@@ -37,9 +37,10 @@ function openScoreboard() {
 	});
 }
 
+
 function onSubmitSigninForm(evt) {
 	evt.preventDefault();
-	const fields = ['email', 'password'];
+	const fields = ['email', 'pass'];
 
 	const form = evt.currentTarget;
 	const formElements = form.elements;
