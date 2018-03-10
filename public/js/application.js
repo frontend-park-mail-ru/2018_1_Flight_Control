@@ -13,6 +13,8 @@ const subheader = document.getElementsByClassName('js-subheader')[0];
 const signupForm = document.getElementsByClassName('js-signup-form')[0];
 const signinForm = document.getElementsByClassName('js-signin-form')[0];
 
+const url_api_server = 'https://flightcontrol.herokuapp.com/api/user/'
+
 const sections = {
 	signup: signupSection,
 	signin: signinSection,
@@ -146,7 +148,7 @@ function loadMe(callback) {
 
 function signupUser(user, callback) {
 	httpModule.doPost({
-		url: 'https://flightcontrol.herokuapp.com/api/user/register',
+		url: url_api_server + 'register',
 		callback,
 		data: user
 	});
@@ -154,10 +156,14 @@ function signupUser(user, callback) {
 
 function loginUser(user, callback) {
 	httpModule.doPost({
-		url: 'https://flightcontrol.herokuapp.com/api/user/authenticate',
+		url: url_api_server + 'authenticate',
 		callback,
 		data: user
 	});
+}
+
+function logOut() {
+
 }
 
 function checkAuth() {
