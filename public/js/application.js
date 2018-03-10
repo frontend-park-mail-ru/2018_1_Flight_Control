@@ -2,7 +2,7 @@
 
 switch (window.location.hostname) {
 	case 'localhost':
-		window.HttpModule.baseUrl = 'http://localhost:3001';
+		window.HttpModule.baseUrl = 'http://localhost:3000';
 		break;
 	case 'super-frontend.herokuapp.com':
 		window.HttpModule.baseUrl = '//super-frontend-backend.herokuapp.com';
