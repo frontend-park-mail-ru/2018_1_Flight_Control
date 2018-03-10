@@ -1,7 +1,22 @@
 'use strict';
 
+switch (window.location.hostname) {
+	case 'localhost':
+		window.HttpModule.baseUrl = 'http://localhost:3001';
+		break;
+	case 'super-frontend.herokuapp.com':
+		window.HttpModule.baseUrl = '//super-frontend-backend.herokuapp.com';
+		break;
+	default:
+		window.HttpModule.baseUrl = '';
+}
+
 const httpModule = new window.HttpModule();
-const scoreboardComponent = new window.ScoreboardComponent('.js-scoreboard-table');
+const EScoreboardTypes = window.EScoreboardTypes;
+const scoreboardComponent = new window.ScoreboardComponent({
+	selector: '.js-scoreboard-table',
+	type: EScoreboardTypes.TMPL,
+});
 
 const application = document.getElementById('application');
 const signupSection = document.getElementById('signup');
@@ -13,13 +28,11 @@ const subheader = document.getElementsByClassName('js-subheader')[0];
 const signupForm = document.getElementsByClassName('js-signup-form')[0];
 const signinForm = document.getElementsByClassName('js-signin-form')[0];
 
-const url_api_server = 'https://flightcontrol.herokuapp.com/api/user/'
-
 const sections = {
 	signup: signupSection,
 	signin: signinSection,
 	scoreboard: scoreboardSection,
-	menu: menuSection
+	menu: menuSection,
 };
 
 function openScoreboard() {
@@ -33,16 +46,13 @@ function openScoreboard() {
 
 		console.dir(users);
 		scoreboardComponent.data = users;
-		// scoreboardComponent.renderDOM();
-		// scoreboardComponent.renderString();
-		scoreboardComponent.renderTmpl();
+		scoreboardComponent.render();
 	});
 }
 
-
 function onSubmitSigninForm(evt) {
 	evt.preventDefault();
-	const fields = ['email', 'pass'];
+	const fields = ['email', 'password'];
 
 	const form = evt.currentTarget;
 	const formElements = form.elements;
@@ -61,7 +71,7 @@ function onSubmitSigninForm(evt) {
 			return;
 		}
 
-		//checkAuth();
+		checkAuth();
 		openSection('menu');
 	});
 }
@@ -103,7 +113,7 @@ const openFunctions = {
 		signinForm.removeEventListener('submit', onSubmitSigninForm);
 		signinForm.reset();
 		signinForm.addEventListener('submit', onSubmitSigninForm);
-	}
+	},
 };
 
 function openSection(name) {
@@ -134,36 +144,32 @@ application.addEventListener('click', function (evt) {
 function loadAllUsers(callback) {
 	httpModule.doGet({
 		url: '/users',
-		callback
+		callback,
 	});
 }
 
 function loadMe(callback) {
 	httpModule.doGet({
 		url: '/me',
-		callback
+		callback,
 	});
 }
 
 
 function signupUser(user, callback) {
 	httpModule.doPost({
-		url: url_api_server + 'register',
+		url: '/signup',
 		callback,
-		data: user
+		data: user,
 	});
 }
 
 function loginUser(user, callback) {
 	httpModule.doPost({
-		url: url_api_server + 'authenticate',
+		url: '/login',
 		callback,
-		data: user
+		data: user,
 	});
-}
-
-function logOut() {
-
 }
 
 function checkAuth() {
@@ -173,7 +179,7 @@ function checkAuth() {
 			return;
 		}
 
-		//console.log('me is', me);
+		console.log('me is', me);
 		subheader.textContent = `Привет, ${me.email}!!!`;
 	});
 }
