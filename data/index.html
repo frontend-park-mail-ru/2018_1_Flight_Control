@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="node-js-128.png">
+    <title>Sample Application</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/js/components/Scoreboard/paginator/paginator.css">
+</head>
+<body>
+<main id="application">
+
+    <section id="menu" hidden="true">
+        <h1>FlightControl</h1>
+        <ul>
+            <li><a href="#" data-section="start">Start</a></li>
+            <li><a href="#" data-section="profile">Profile</a></li>
+            <li><a href="#" data-section="signup">Registration</a></li>
+            <li><a href="#" data-section="signin">Login</a></li>
+            <li><a href="#" data-section="scoreboard">Scoreboard</a></li>
+            <li><a href="#" data-section="about">About</a></li>       
+        </ul>
+    </section>
+
+    <section id="start" hidden="true">
+        <h1>Select game</h1>
+        <a href="#" data-section="menu">Back</a>
+    </section>
+
+    <section id="about" hidden="true">
+        <h1>About</h1>
+        <h3>About game</h3>
+        <a href="#" data-section="menu">Back</a>
+    </section>
+
+    <!--<section id="profile" hidden="true">
+        <h1>Profile</h1>
+        <form class="js-signup-form">
+            <div id="validation_signup"></div>
+            <input required autocomplete="email" type="email" name="email" id="email" placeholder="input you email here..">
+            <input required autocomplete="off" type="text" name="username" id="username" placeholder="input you username here..">
+            <input required autocomplete="off" type="password" name="password" id="password" placeholder="***********">
+            <input required autocomplete="off" type="password" name="password_repeat" id="password_repeat" placeholder="***********">
+            <input class="js-signup-submit" type="submit">
+        </form>
+        <a href="#" data-section="menu">Back</a>
+    </section>!-->
+
+    <section id="signup" hidden="true">
+        <h1>Registration</h1>
+        <form class="js-signup-form">
+            <div id="validation_signup"></div>
+            <input required autocomplete="email" type="email" name="email" id="email" placeholder="input you email here..">
+            <input required autocomplete="off" type="text" name="username" id="username" placeholder="input you username here..">
+            <input required autocomplete="off" type="password" name="password" id="password" placeholder="***********">
+            <input required autocomplete="off" type="password" name="password_repeat" id="password_repeat" placeholder="***********">
+            <input class="js-signup-submit" type="submit">
+        </form>
+        <a href="#" data-section="menu">Back</a>
+    </section>
+
+
+    <section id="signin" hidden="true">
+        <h1>Login</h1>
+        <form class="js-signin-form">
+            <div id="validation_signin"></div>
+            <input required autocomplete="email" type="email" name="email" id="email1" placeholder="input email here...">
+            <input required autocomplete="off" type="password" name="password" id="password1" placeholder="***********">
+            <input required class="js-signin-submit" type="submit">
+        </form>
+        <a href="#" data-section="menu">Back</a>
+    </section>
+
+    <section id="scoreboard" hidden="false">
+        <h1>Scoreboard</h1>
+        <div class="js-scoreboard-table"></div>
+        <div id="pagination"></div>
+        <a href="#" data-section="menu">В меню</a>
+    </section>
+
+</main>
+
+<script src="/js/utils/noop.js"></script>
+<script src="/js/utils/EScoreboardTypes.js"></script>
+<script src="/js/modules/http.js"></script>
+<script src="/js/components/Scoreboard/Scoreboard.tmpl.js"></script>
+<script src="/js/components/Scoreboard/Scoreboard.js"></script>
+<script src="/js/components/Scoreboard/paginator/paginator.js"></script>
+<script src="/js/application.js"></script>
+</body>
+</html>

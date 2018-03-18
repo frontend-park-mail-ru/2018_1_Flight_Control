@@ -3,7 +3,7 @@
  * javascript page navigation
  * * * * * * * * * * * * * * * * */
 
-var Pagination = {
+let Pagination = {
 
     code: '',
 
@@ -150,9 +150,9 @@ var Pagination = {
 * Initialization
 * * * * * * * * * * * * * * * * */
 
-var init = function() {
+let init = function() {
     Pagination.Init(document.getElementById('pagination'), {
-        size: 30, // pages size
+        size: 60 / 10, // pages size
         page: 1,  // selected page
         step: 3   // pages before and after current
     });

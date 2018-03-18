@@ -1,4 +1,4 @@
-html {
+/*html {
     height: 100%;
     width: 100%;
     background-color: #D7D7D7;
@@ -21,7 +21,7 @@ body:before {
     display: inline-block;
     width: 0; height: 100%;
     vertical-align: middle;
-}
+}*/
 
 #pagination {
     display: inline-block;
@@ -31,11 +31,11 @@ body:before {
     border-top: 1px solid #AEAEAE;
     border-bottom: 1px solid #FFFFFF;
     background-color: #DADADA;
-    background-image: -webkit-linear-gradient(top, #DBDBDB, #E2E2E2);
+   /* background-image: -webkit-linear-gradient(top, #DBDBDB, #E2E2E2);
     background-image:    -moz-linear-gradient(top, #DBDBDB, #E2E2E2);
     background-image:     -ms-linear-gradient(top, #DBDBDB, #E2E2E2);
     background-image:      -o-linear-gradient(top, #DBDBDB, #E2E2E2);
-    background-image:         linear-gradient(top, #DBDBDB, #E2E2E2);
+    background-image:         linear-gradient(top, #DBDBDB, #E2E2E2);*/
 }
 #pagination a, #pagination i {
     display: inline-block;
@@ -45,11 +45,11 @@ body:before {
     text-align: center;
     font-size: 10px;
     padding: 3px 0 2px 0;
-    -webkit-user-select:none;
+   /* -webkit-user-select:none;
        -moz-user-select:none;
         -ms-user-select:none;
          -o-user-select:none;
-            user-select:none;
+            user-select:none;*/
 }
 
 #pagination a {
@@ -60,11 +60,11 @@ body:before {
     box-shadow: inset 0 1px 0 0 #FFF, 0 1px 2px #666;
     text-shadow: 0 1px 1px #FFF;
     background-color: #E6E6E6;
-    background-image: -webkit-linear-gradient(top, #F3F3F3, #D7D7D7);
+    /* background-image: -webkit-linear-gradient(top, #F3F3F3, #D7D7D7);
     background-image:    -moz-linear-gradient(top, #F3F3F3, #D7D7D7);
     background-image:     -ms-linear-gradient(top, #F3F3F3, #D7D7D7);
     background-image:      -o-linear-gradient(top, #F3F3F3, #D7D7D7);
-    background-image:         linear-gradient(top, #F3F3F3, #D7D7D7);
+    background-image:         linear-gradient(top, #F3F3F3, #D7D7D7);*/
 }
 #pagination i {
     margin: 0 3px 0 3px;
@@ -73,9 +73,9 @@ body:before {
     border: 1px solid #E9E9E9;
     box-shadow: 0 1px 1px #999;
     background-color: #DFDFDF;
-    background-image: -webkit-linear-gradient(top, #D0D0D0, #EBEBEB);
+   /* background-image: -webkit-linear-gradient(top, #D0D0D0, #EBEBEB);
     background-image:    -moz-linear-gradient(top, #D0D0D0, #EBEBEB);
     background-image:     -ms-linear-gradient(top, #D0D0D0, #EBEBEB);
     background-image:      -o-linear-gradient(top, #D0D0D0, #EBEBEB);
-    background-image:         linear-gradient(top, #D0D0D0, #EBEBEB);
+    background-image:         linear-gradient(top, #D0D0D0, #EBEBEB);*/
 }

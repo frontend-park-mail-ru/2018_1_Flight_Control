@@ -1,22 +1,8 @@
 'use strict';
 
-switch (window.location.hostname) {
-	case 'localhost':
-		window.HttpModule.baseUrl = 'http://localhost:3000';
-		break;
-	case 'super-frontend.herokuapp.com':
-		window.HttpModule.baseUrl = '//super-frontend-backend.herokuapp.com';
-		break;
-	default:
-		window.HttpModule.baseUrl = '';
-}
-
 const httpModule = new window.HttpModule();
-const EScoreboardTypes = window.EScoreboardTypes;
-const scoreboardComponent = new window.ScoreboardComponent({
-	selector: '.js-scoreboard-table',
-	type: EScoreboardTypes.TMPL,
-});
+const scoreboardComponent = new window.ScoreboardComponent('.js-scoreboard-table');
+//const scoreboardPaginator = new window.ScoreboardPaginator('.scoreboard_paginator')
 
 const application = document.getElementById('application');
 const signupSection = document.getElementById('signup');
@@ -28,11 +14,14 @@ const subheader = document.getElementsByClassName('js-subheader')[0];
 const signupForm = document.getElementsByClassName('js-signup-form')[0];
 const signinForm = document.getElementsByClassName('js-signin-form')[0];
 
+const baseUrl = 'https://flightcontrol.herokuapp.com/api/user/';
+const baseUrl = 'http://localhost:3000';
+
 const sections = {
 	signup: signupSection,
 	signin: signinSection,
 	scoreboard: scoreboardSection,
-	menu: menuSection,
+	menu: menuSection
 };
 
 function openScoreboard() {
@@ -46,7 +35,10 @@ function openScoreboard() {
 
 		console.dir(users);
 		scoreboardComponent.data = users;
-		scoreboardComponent.render();
+
+	    //scoreboardComponent.renderDOM();
+		scoreboardComponent.renderString();
+		//scoreboardComponent.renderTmpl();
 	});
 }
 
@@ -62,24 +54,84 @@ function onSubmitSigninForm(evt) {
 		return allfields;
 	}, {});
 
-	console.info('Авторизация пользователя', formdata);
+	/*if (!isEmail(formdata['email']) || !isPassword(formdata['password'])) {
+        document.getElementById("validation_signin").innerHTML = "Email or Password incorrect!";
+        return;
+	}*/
 
-	loginUser(formdata, function (err, response) {
-		if (err) {
-			signupForm.reset();
-			alert('Неверно!');
-			return;
-		}
+    console.info('Authorithation user', formdata);
+	loginUser(formdata)
+		.then(() => checkAuth())
+		.then(() => openSection('menu'))
+		.catch(() => {
+			signinForm.clear;
+            document.getElementById("validation_signin").innerHTML = "wrong email or password";
+        });
 
-		checkAuth();
-		openSection('menu');
-	});
+}
+
+function loginUser(user) {
+    return httpModule.fetchPost({
+        url: baseUrl + '/authenticate',
+        formData: user
+    });
+}
+
+function checkAuth() {
+    return loadMe()
+        .then (me => {alert('good'); alert(me.email)})
+        .catch(() => alert("Неавторизован"));
+}
+
+function loadMe() {
+    return httpModule.FetchGet({
+        url: baseUrl + '/get'
+    });
+}
+
+/*function checkAuth() {
+    loadMe(function (err, me) {
+        if (err) {
+            subheader.textContent = 'Вы неавторизованы';
+            return;
+        }
+
+        console.log('me is', me);
+        subheader.textContent = `Привет, ${me.email}!!!`;
+    });
+}
+function loadMe() {
+    httpModule.FetchGet({
+        url: baseUrl + '/me'
+    });
+}*/
+
+
+function isPassword(password) {
+    if (!password.match(/^[a-zA-Z0-9]+$/)) {
+        return false;
+    }
+    return true;
+}
+
+
+function isEmail(email) {
+    if (!email.match(/^[0-9a-z-\.]+\@[0-9a-z-]{2,}\.[a-z]{2,}$/i)) {
+        return false;
+    }
+    return true;
+}
+
+function isUsername(username) {
+    if (!username.match(/^[a-zA-Z0-9]+$/)) {
+        return false;
+    }
+    return true;
 }
 
 function onSubmitSignupForm(evt) {
 	evt.preventDefault();
-	const fields = ['email', 'password', 'password_repeat', 'age'];
-
+	const fields = ['email', 'password', 'password_repeat', 'username'];
 	const form = evt.currentTarget;
 	const formElements = form.elements;
 
@@ -88,18 +140,20 @@ function onSubmitSignupForm(evt) {
 		return allfields;
 	}, {});
 
-	console.info('Регистрация пользователя', formdata);
-
-	signupUser(formdata, function (err, response) {
-		if (err) {
-			signupForm.reset();
-			alert('Неверно!');
-			return;
-		}
-
-		checkAuth();
-		openSection('menu');
-	});
+	if (validationSignup(formdata, (err) => {
+		document.getElementById("validation_signup").innerHTML = err;
+	})) {
+		console.info('Registration user', formdata);
+		signupUser(formdata, function (err, response) {
+			if (err) {
+				signupForm.reset();
+				document.getElementById("validation_signup").innerHTML = "data incorrect!"
+				return;
+			}
+			checkAuth();
+			openSection('menu');
+		});
+	}
 }
 
 const openFunctions = {
@@ -113,7 +167,7 @@ const openFunctions = {
 		signinForm.removeEventListener('submit', onSubmitSigninForm);
 		signinForm.reset();
 		signinForm.addEventListener('submit', onSubmitSigninForm);
-	},
+	}
 };
 
 function openSection(name) {
@@ -144,45 +198,20 @@ application.addEventListener('click', function (evt) {
 function loadAllUsers(callback) {
 	httpModule.doGet({
 		url: '/users',
-		callback,
+		callback
 	});
 }
-
-function loadMe(callback) {
-	httpModule.doGet({
-		url: '/me',
-		callback,
-	});
-}
-
 
 function signupUser(user, callback) {
 	httpModule.doPost({
 		url: '/signup',
 		callback,
-		data: user,
+		data: user
 	});
 }
 
-function loginUser(user, callback) {
-	httpModule.doPost({
-		url: '/login',
-		callback,
-		data: user,
-	});
-}
 
-function checkAuth() {
-	loadMe(function (err, me) {
-		if (err) {
-			subheader.textContent = 'Вы неавторизованы';
-			return;
-		}
 
-		console.log('me is', me);
-		subheader.textContent = `Привет, ${me.email}!!!`;
-	});
-}
 
 openSection('menu');
 checkAuth();
