@@ -9,65 +9,73 @@ const signupSection = document.getElementById('signup');
 const signinSection = document.getElementById('signin');
 const scoreboardSection = document.getElementById('scoreboard');
 const menuSection = document.getElementById('menu');
+const aboutSection = document.getElementById('about');
+const profileSection = document.getElementById('profile');
 
 const subheader = document.getElementsByClassName('js-subheader')[0];
 const signupForm = document.getElementsByClassName('js-signup-form')[0];
 const signinForm = document.getElementsByClassName('js-signin-form')[0];
+const profileForm = document.getElementsByClassName('js-profile-form')[0];
 
-const baseUrl = 'https://flightcontrol.herokuapp.com/api/user/';
+
+//const baseUrl = 'https://flightcontrol.herokuapp.com/api/user/';
 const baseUrl = 'http://localhost:3000';
 
 const sections = {
 	signup: signupSection,
 	signin: signinSection,
 	scoreboard: scoreboardSection,
-	menu: menuSection
+	menu: menuSection,
+	about: aboutSection,
+	profile: profileSection
 };
 
+//SCOREBOARD
 function openScoreboard() {
-	scoreboardComponent.clear();
-
-	loadAllUsers(function (err, users) {
-		if (err) {
-			console.error(err);
-			return;
-		}
-
-		console.dir(users);
-		scoreboardComponent.data = users;
-
-	    //scoreboardComponent.renderDOM();
-		scoreboardComponent.renderString();
-		//scoreboardComponent.renderTmpl();
-	});
+    scoreboardComponent.clear();
+    loadAllUsers()
+        .then(users => {
+            console.dir(users);
+            scoreboardComponent.data = users;
+            //scoreboardComponent.renderString();
+            scoreboardComponent.renderTmpl();
+        })
+        .catch(err => console.error(err));
+    //scoreboardComponent.renderDOM();
+    //
 }
 
+
+function loadAllUsers() {
+    return httpModule.fetchGet({
+        url: baseUrl + '/users'
+    });
+}
+
+//LOGIN
 function onSubmitSigninForm(evt) {
 	evt.preventDefault();
 	const fields = ['email', 'password'];
-
 	const form = evt.currentTarget;
 	const formElements = form.elements;
-
 	const formdata = fields.reduce(function (allfields, fieldname) {
 		allfields[fieldname] = formElements[fieldname].value;
 		return allfields;
 	}, {});
 
-	/*if (!isEmail(formdata['email']) || !isPassword(formdata['password'])) {
+	if (!isEmail(formdata['email']) || !isPassword(formdata['password'])) {
         document.getElementById("validation_signin").innerHTML = "Email or Password incorrect!";
         return;
-	}*/
+	}
 
     console.info('Authorithation user', formdata);
 	loginUser(formdata)
 		.then(() => checkAuth())
 		.then(() => openSection('menu'))
 		.catch(() => {
-			signinForm.clear;
+			signinForm.reset();
             document.getElementById("validation_signin").innerHTML = "wrong email or password";
         });
-
 }
 
 function loginUser(user) {
@@ -77,36 +85,104 @@ function loginUser(user) {
     });
 }
 
+//---------------------------------
+
+//REGISTRATION
+function onSubmitSignupForm(evt) {
+    evt.preventDefault();
+    const fields = ['email', 'password', 'password_repeat', 'username'];
+    const form = evt.currentTarget;
+    const formElements = form.elements;
+    const formdata = fields.reduce(function (allfields, fieldname) {
+        allfields[fieldname] = formElements[fieldname].value;
+        return allfields;
+    }, {});
+
+    if (!isPassword(formdata['password']) || !isEmail(formdata['email'])
+		|| !isUsername(formdata['username'])){
+        	document.getElementById("validation_signup").innerHTML = "Email or Password incorrect!";
+        	return;
+	}
+
+	if (formdata['password'] !== formdata['password_repeat']) {
+        document.getElementById("validation_signup").innerHTML = "passwords not equal!";
+        return;
+	}
+
+	console.info('Registration user', formdata);
+	signupUser(formdata)
+		.then(() => checkAuth())
+		.then(() => openSection('menu'))
+		.catch(() => {
+			signupForm.reset();
+			document.getElementById("validation_signup").innerHTML = "data incorrect!";
+		});
+
+}
+
+function signupUser(user) {
+    return httpModule.fetchPost({
+        url: baseUrl + '/register',
+        formData: user
+    });
+}
+//-------------------------------------------------
+//PROFILE
+function onSubmitProfileForm(evt) {
+	evt.preventDefault();
+    const fields = ['email', 'password', 'password_repeat', 'username'];
+    const form = evt.currentTarget;
+    const formElements = form.elements;
+    const formdata = fields.reduce(function (allfields, fieldname) {
+        allfields[fieldname] = formElements[fieldname].value;
+        return allfields;
+    }, {});
+
+    if (!isPassword(formdata['password']) || !isEmail(formdata['email'])
+        || !isUsername(formdata['username'])){
+        document.getElementById("validation_profile").innerHTML = "Email or Password incorrect!";
+        return;
+    }
+
+    if (formdata['password'] !== formdata['password_repeat']) {
+        document.getElementById("validation_profile").innerHTML = "passwords not equal!";
+        return;
+    }
+
+    console.info('change data user', formdata);
+    signupUser(formdata)
+        .then(() => checkAuth())
+        .then(() => openSection('menu'))
+        .catch(() => {
+            signupForm.reset();
+            document.getElementById("validation_profile").innerHTML = "data incorrect!";
+        });
+
+}
+
+function profileUser(user) {
+    return httpModule.fetchPost({
+        url: baseUrl + '/change',
+        formData: user
+    });
+}
+//-----------------------------------------------------
+//check cookie login
+
 function checkAuth() {
     return loadMe()
-        .then (me => {alert('good'); alert(me.email)})
+        .then(me => {alert('good'); alert(me.email)})
         .catch(() => alert("Неавторизован"));
 }
 
 function loadMe() {
-    return httpModule.FetchGet({
+    return httpModule.fetchGet({
         url: baseUrl + '/get'
     });
 }
 
-/*function checkAuth() {
-    loadMe(function (err, me) {
-        if (err) {
-            subheader.textContent = 'Вы неавторизованы';
-            return;
-        }
-
-        console.log('me is', me);
-        subheader.textContent = `Привет, ${me.email}!!!`;
-    });
-}
-function loadMe() {
-    httpModule.FetchGet({
-        url: baseUrl + '/me'
-    });
-}*/
-
-
+//-------------------------------------------------
+//Check valid data
 function isPassword(password) {
     if (!password.match(/^[a-zA-Z0-9]+$/)) {
         return false;
@@ -114,9 +190,9 @@ function isPassword(password) {
     return true;
 }
 
-
 function isEmail(email) {
-    if (!email.match(/^[0-9a-z-\.]+\@[0-9a-z-]{2,}\.[a-z]{2,}$/i)) {
+    //email.match(/^[0-9a-z-\.]+\@[0-9a-z-]{2,}\.[a-z]{2,}$/i)
+    if (!email.match(/^[-._a-z0-9]+@(?:[a-z0-9][-a-z0-9]+\.)+[a-z]{2,6}$/) ) {
         return false;
     }
     return true;
@@ -129,32 +205,7 @@ function isUsername(username) {
     return true;
 }
 
-function onSubmitSignupForm(evt) {
-	evt.preventDefault();
-	const fields = ['email', 'password', 'password_repeat', 'username'];
-	const form = evt.currentTarget;
-	const formElements = form.elements;
-
-	const formdata = fields.reduce(function (allfields, fieldname) {
-		allfields[fieldname] = formElements[fieldname].value;
-		return allfields;
-	}, {});
-
-	if (validationSignup(formdata, (err) => {
-		document.getElementById("validation_signup").innerHTML = err;
-	})) {
-		console.info('Registration user', formdata);
-		signupUser(formdata, function (err, response) {
-			if (err) {
-				signupForm.reset();
-				document.getElementById("validation_signup").innerHTML = "data incorrect!"
-				return;
-			}
-			checkAuth();
-			openSection('menu');
-		});
-	}
-}
+//-----------------------------------------------------
 
 const openFunctions = {
 	scoreboard: openScoreboard,
@@ -167,7 +218,12 @@ const openFunctions = {
 		signinForm.removeEventListener('submit', onSubmitSigninForm);
 		signinForm.reset();
 		signinForm.addEventListener('submit', onSubmitSigninForm);
-	}
+	},
+	profile: function () {
+        profileForm.removeEventListener('submit', onSubmitProfileForm);
+        profileForm.reset();
+        profileForm.addEventListener('submit', onSubmitProfileForm);
+    }
 };
 
 function openSection(name) {
@@ -194,24 +250,4 @@ application.addEventListener('click', function (evt) {
 	openSection(section);
 });
 
-
-function loadAllUsers(callback) {
-	httpModule.doGet({
-		url: '/users',
-		callback
-	});
-}
-
-function signupUser(user, callback) {
-	httpModule.doPost({
-		url: '/signup',
-		callback,
-		data: user
-	});
-}
-
-
-
-
-openSection('menu');
-checkAuth();
+checkAuth().then(() => openSection('menu'))

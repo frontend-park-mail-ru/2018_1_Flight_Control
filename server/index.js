@@ -7,6 +7,7 @@ const cookie = require('cookie-parser');
 const morgan = require('morgan');
 const debug = require('debug');
 const uuid = require('uuid/v4');
+const fest = require('fest');
 
 const logger = debug('mylogger');
 logger('Starting app');
@@ -23,25 +24,25 @@ const users = {
 	'a.ostapenko@corp.mail.ru': {
 		email: 'a.ostapenko@corp.mail.ru',
 		password: 'password',
-		age: 20,
+        username: 'sadsada',
 		score: 72
 	},
 	'd.dorofeev@corp.mail.ru': {
 		email: 'd.dorofeev@corp.mail.ru',
 		password: 'password',
-		age: 20,
+        username: 'fafad',
 		score: 100500
 	},
 	'a.udalov@corp.mail.ru': {
 		email: 'a.udalov@corp.mail.ru',
 		password: 'password',
-		age: 20,
+        username: 'asds',
 		score: 72
 	},
 	'marina.titova@corp.mail.ru': {
 		email: 'marina.titova@corp.mail.ru',
 		password: 'password',
-		age: 20,
+		username: '20',
 		score: 72
 	},
 	'a.tyuldyukov@corp.mail.ru': {
@@ -53,24 +54,24 @@ const users = {
 };
 const ids = {};
 
-app.post('/signup', function (req, res) {
+app.post('/register', function (req, res) {
+    console.log(req.body);
 	const password = req.body.password;
 	const email = req.body.email;
-	const age = +req.body.age;
+	const username = req.body.username;
 	if (
-		!password || !email || !age ||
+		!password || !email || !username ||
 		!password.match(/^\S{4,}$/) ||
-		!email.match(/@/) ||
-		!(typeof age === 'number' && age > 10 && age < 100)
+		!email.match(/@/)
 	) {
 		return res.status(400).json({error: 'Не валидные данные пользователя'});
 	}
-	if (users[email]) {
+	if (users[email] || users[username]) {
 		return res.status(400).json({error: 'Пользователь уже существует'});
 	}
 
 	const id = uuid();
-	const user = {password, email, age, score: 0};
+	const user = {password, email, username, score: 0};
 	ids[id] = email;
 	users[email] = user;
 
@@ -78,9 +79,7 @@ app.post('/signup', function (req, res) {
 	res.status(201).json({id});
 });
 
-app.post('/login', function (req, res) {
-    //logger('123');
-    console.log("123");
+app.post('/authenticate', function (req, res) {
 	console.log(req.body.password);
 	const password = req.body.password;
 	const email = req.body.email;
@@ -98,7 +97,7 @@ app.post('/login', function (req, res) {
 	res.status(201).json({id});
 });
 
-app.get('/me', function (req, res) {
+app.get('/get', function (req, res) {
 	const id = req.cookies['frontend'];
 	const email = ids[id];
 	if (!email || !users[email]) {

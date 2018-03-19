@@ -1,4 +1,8 @@
 (function () {
+    const noop = window.noop;
+    //const EScoreboardTypes = window.EScoreboardTypes;
+    //const ScoreboardTemplate = window.fest['js/components/Scoreboard/Scoreboard.tmpl'];
+   // const fest = required('fest'); 
 
 	class ScoreboardComponent {
 		constructor(selector = 'body') {
@@ -9,8 +13,8 @@
 			return this._data;
 		}
 
-		set data(data = []) {
-			this._data = data;
+		set data(data) {
+			this._data = data || [];
 		}
 
 		clear() {
@@ -73,15 +77,27 @@
 			`;
 		}
 
-		/*renderTmpl() {
+		renderTmpl() {
+            /*if (!this._data) {
+                return;
+            }
+
+            this._el.innerHTML = ScoreboardTemplate(this._data);
+            */
 			if (!this._data) {
 				return;
 			}
-			const data = {'data' : this._data};
-			const template = window.scoreboardContainerTmplTemplate(data);
+			//var data = {name: 'Jack "The Ripper"'},
+    		var template = 'Scoreboard.tmpl.xml';
+    		//console.log(this._data);
+			//console.log(fest.render(template, this._data, {beautify: false}));
+
+			//const data = {'data' : this._data};
+			//const template = window.scoreboardContainerTmplTemplate(data);
 			//fest['js/components/Scoreboard/Scoreboard.tmpl'](data);
-			this._el.innerHTML = template;
-		}*/
+			//console.log(fest.render(fest.render('Scoreboard.tmpl.xml'), this._data));
+			this._el.innerHTML = fest.render(template, this._data, {beautify: false});
+		}
 
 	}
 

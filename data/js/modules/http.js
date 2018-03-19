@@ -14,7 +14,7 @@
     }
 
   	class HttpModule {
-	    FetchGet({url = '/'} = {}) {
+	    fetchGet({url = '/'} = {}) {
 	        return fetch(url, {
                     method: 'GET',
                     mode: 'cors',
@@ -22,7 +22,7 @@
             })
             .then(checkStatus)
             .then(json)
-            .catch(error => { alert(error); throw error; });
+            .catch(error => { throw error; });
 	    }
 
 	    fetchPost({url = '/', formData = {}}) {

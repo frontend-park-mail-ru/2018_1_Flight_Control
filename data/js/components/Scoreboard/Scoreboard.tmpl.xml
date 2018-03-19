@@ -5,7 +5,6 @@
 				<tr class="scoreboard__row">
 					<td><fest:value>i + 1</fest:value></td>
 					<td><fest:value>v.email</fest:value></td>
-					<td><fest:value>v.age</fest:value></td>
 					<td><fest:value>v.score</fest:value></td>
 				</tr>
 			</fest:for>
