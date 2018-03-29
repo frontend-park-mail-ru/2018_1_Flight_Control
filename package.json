@@ -1,0 +1,20 @@
+{
+  "name": "flightsimulator",
+  "version": "1.0.0",
+  "description": "GameDev",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "debug": "^3.1.0",
+    "express": "^4.16.3",
+    "morgan": "^1.9.0",
+    "path": "^0.12.7",
+    "uuid": "^3.2.1"
+  }
+}

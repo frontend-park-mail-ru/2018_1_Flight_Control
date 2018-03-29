@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<main id="application">
+
+    <section id="menu">
+
+        <h1>Меню</h1>
+
+        <h2 class="js-subheader">Загрузка данных...</h2>
+
+        <ul id="menulist">
+            <li id="signup-ds"><a href="#" data-section="signup">Регистрация</a></li>
+            <li id="signin-ds"><a href="#" data-section="signin">Авторизация</a></li>
+            <li id="scoreboard-ds"><a href="#" data-section="scoreboard">Таблица лидеров</a></li>
+            <!--<li><a href="#" data-section="profile">Профиль</a></li>-->
+            <li id="about-ds"><a href="#" data-section="about">About</a></li>
+            <li id="sgame-ds"><a href="#" data-section="sgame">Одиночная игра</a></li>
+            <li id="mgame-ds"><a href="#" data-section="mgame">Мультиплеер</a></li>
+        </ul>
+
+    </section>
+
+
+    <section id="signup">
+
+        <h1>Зарегистрируйтесь</h1>
+
+        <form class="js-signup-form">
+            <input required type="email" name="email" id="email" placeholder="Введите ваш email">
+            <input required type="number" name="age" id="age" placeholder="Ваш возраст">
+            <input required type="password" name="password" id="password" placeholder="Ваш пароль">
+            <input required type="password" name="password_repeat" id="password_repeat" placeholder="Повторите пароль">
+            <input class="js-signup-submit" type="submit">
+        </form>
+
+        <a href="#" data-section="menu">В меню</a>
+
+    </section>
+
+
+    <section id="signin">
+
+        <h1>Войдите на сайт</h1>
+
+        <form class="js-signin-form">
+            <input required type="email" name="email" id="email1" placeholder="Введите ваш email">
+            <input required type="password" name="password" id="password1" placeholder="Ваш пароль">
+            <input required class="js-signin-submit" type="submit">
+        </form>
+
+        <a href="#" data-section="menu">В меню</a>
+
+    </section>
+
+    <section id="scoreboard">
+
+        <h1>Таблица лидеров</h1>
+
+        <div class="js-scoreboard-table">
+
+        </div>
+
+        <a href="#" data-section="menu">В меню</a>
+
+    </section>
+
+    <section id="profile">
+        
+        <h1>Личный кабинет</h1>
+
+        <div class="js-profile-table">
+
+        </div>
+
+        <a href="#" data-section="menu">В меню</a>
+        <a href="#" data-section="game">Начать игру</a>
+        <a href="#" data-section="edit">Редактировать</a>
+        <a href="#" data-section="scoreboard">Таблица лидеров</a>
+        <a href="#" data-section="exit">Выход</a>
+
+    </section>
+
+    <section id="profileedit">
+
+        <h1>Редактирование профиля</h1>
+
+        <form class="js-profileedit-form">
+                <input required type="email" name="email" id="email1" placeholder="Введите новый email">
+                <input required type="password" name="password" id="password1" placeholder="Новый пароль">
+                <input required class="js-profileedit-submit" type="submit">
+        </form>
+
+    </section>
+
+    <section id="about">
+
+        <h1>About</h1>
+
+        <div class="js-about">
+
+        </div>
+
+        <a href="#" data-section="menu">В меню</a>
+
+    </section>
+
+</main>
+
+<script src="js/application.js"></script>
+</body>
+</html>
