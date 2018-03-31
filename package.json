@@ -6,8 +6,7 @@
   "scripts": {
     "start": "npm run build && DEBUG=mylogger node server",
     "start-api": "PORT=3000 DEBUG=mylogger node server",
-    "start:raw": "node server",
-    "develop": "npm run start & npm run start-api"
+    "start:raw": "node server"
   },
   "contributors": [
     "Alex Kuznetsov"
