@@ -7,7 +7,7 @@ const cookie = require('cookie-parser');
 const morgan = require('morgan');
 const debug = require('debug');
 const uuid = require('uuid/v4');
-const fileUpload = require('express-fileupload');
+//const fileUpload = require('express-fileupload');
 
 const logger = debug('mylogger');
 logger('Starting app');
@@ -84,7 +84,7 @@ app.post('/register', function (req, res) {
 	const avatar = req.files.avatar;
 	let imgName = avatar.name;
 	if (imgName === undefined || imgName === '') {
-		avatar.mv('./server/img/' + avatar.name
+		//avatar.mv('./server/img/' + avatar.name
 	} else {
 		imgName = 'default.jpg';
 	}
