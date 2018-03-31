@@ -32,8 +32,8 @@ function showLinks(show) {
 	});
 }
 
-const baseUrl = 'https://flightcontrol.herokuapp.com/api/user/';
-//const baseUrl = 'http://localhost:3000';
+//const baseUrl = 'https://flightcontrol.herokuapp.com/api/user/';
+const baseUrl = 'http://localhost:3000';
 
 const sections = {
 	signup: signupSection,
@@ -125,7 +125,8 @@ function loginUser(user) {
 //REGISTRATION
 function onSubmitSignupForm(evt) {
     evt.preventDefault();
-    const fields = ['email', 'password', 'password_repeat', 'username', 'img'];
+    //const fields = ['email', 'password', 'password_repeat', 'username', 'img'];
+    const fields = ['email', 'password', 'password_repeat', 'username']
     const form = evt.currentTarget;
     const formElements = form.elements;
     const formdata = fields.reduce(function (allfields, fieldname) {
