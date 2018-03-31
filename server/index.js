@@ -149,7 +149,7 @@ app.get('/logout', function (req, res) {
 	res.status(200).json({});
 });
 
-app.get('/users/', function (req, res) {
+app.get('/users', function (req, res) {
 	logger(req.query);
 	const countUsers = Number(req.query.countUsers);
 	const page = Number(req.query.page);
