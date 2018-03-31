@@ -2,7 +2,7 @@
     const noop = window.noop;
     //const EScoreboardTypes = window.EScoreboardTypes;
     //const ScoreboardTemplate = window.fest['js/components/Scoreboard/Scoreboard.tmpl'];
-   // const fest = required('fest'); 
+   // const fest = required('fest');
 
 	class ScoreboardComponent {
 		constructor(selector = 'body') {
@@ -78,25 +78,14 @@
 		}
 
 		renderTmpl() {
-            /*if (!this._data) {
-                return;
-            }
-
-            this._el.innerHTML = ScoreboardTemplate(this._data);
-            */
 			if (!this._data) {
 				return;
 			}
-			//var data = {name: 'Jack "The Ripper"'},
-    		var template = 'Scoreboard.tmpl.xml';
-    		//console.log(this._data);
-			//console.log(fest.render(template, this._data, {beautify: false}));
 
-			//const data = {'data' : this._data};
-			//const template = window.scoreboardContainerTmplTemplate(data);
-			//fest['js/components/Scoreboard/Scoreboard.tmpl'](data);
-			//console.log(fest.render(fest.render('Scoreboard.tmpl.xml'), this._data));
-			this._el.innerHTML = fest.render(template, this._data, {beautify: false});
+			const data = {'data': this._data};
+			const template = generateScoreboard(data);
+			//const template = window.fest['js/components/Scoreboard/Scoreboard.tmpl'](this._data);
+			this._el.innerHTML = template;
 		}
 
 	}

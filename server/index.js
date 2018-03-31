@@ -7,12 +7,11 @@ const cookie = require('cookie-parser');
 const morgan = require('morgan');
 const debug = require('debug');
 const uuid = require('uuid/v4');
-const fest = require('fest');
+const fileUpload = require('express-fileupload');
 
 const logger = debug('mylogger');
 logger('Starting app');
 const app = express();
-
 
 app.use(morgan('dev'));
 app.use(express.static(path.resolve(__dirname, '..', 'data')));
@@ -21,35 +20,47 @@ app.use(cookie());
 
 
 const users = {
-	'a.ostapenko@corp.mail.ru': {
-		email: 'a.ostapenko@corp.mail.ru',
-		password: 'password',
-        username: 'sadsada',
-		score: 72
+	'test@test.test': {
+		email: 'test@test.test',
+		password: '1234',
+		username: 'test',
+		score: 1234,
+		avatar: 'default.jpg'
 	},
-	'd.dorofeev@corp.mail.ru': {
-		email: 'd.dorofeev@corp.mail.ru',
+	'kek@mail.ru': {
+		email: 'kek@mail.ru',
 		password: 'password',
-        username: 'fafad',
-		score: 100500
+		username: 'sadsada',
+		score: 72,
+		avatar: 'default.jpg'
 	},
-	'a.udalov@corp.mail.ru': {
-		email: 'a.udalov@corp.mail.ru',
+	'keker@mail.ru': {
+		email: 'keker@mail.ru',
 		password: 'password',
-        username: 'asds',
-		score: 72
+		username: 'fafad',
+		score: 100500,
+		avatar: 'default.jpg'
 	},
-	'marina.titova@corp.mail.ru': {
-		email: 'marina.titova@corp.mail.ru',
+	'yakken@mail.ru': {
+		email: 'yakken@mail.ru',
+		password: 'password',
+		username: 'asds',
+		score: 72,
+		avatar: 'default.jpg'
+	},
+	'pupkin@mail.ru': {
+		email: 'pupkin@mail.ru',
 		password: 'password',
 		username: '20',
-		score: 72
+		score: 72,
+		avatar: 'default.jpg'
 	},
-	'a.tyuldyukov@corp.mail.ru': {
-		email: 'a.tyuldyukov@corp.mail.ru',
+	'www@mail.ru': {
+		email: 'www@mail.ru',
 		password: 'password',
-		age: 20,
-		score: 72
+		username: '20asda',
+		score: 72,
+		avatar: 'default.jpg'
 	}
 };
 const ids = {};
@@ -70,8 +81,16 @@ app.post('/register', function (req, res) {
 		return res.status(400).json({error: 'Пользователь уже существует'});
 	}
 
+	const avatar = req.files.avatar;
+	let imgName = avatar.name;
+	if (imgName === undefined || imgName === '') {
+		avatar.mv('./server/img/' + avatar.name
+	} else {
+		imgName = 'default.jpg';
+	}
+
 	const id = uuid();
-	const user = {password, email, username, score: 0};
+	const user = {username: username, password: password, email: email, score: 0, avatar: imgName};
 	ids[id] = email;
 	users[email] = user;
 
@@ -109,19 +128,47 @@ app.get('/get', function (req, res) {
 	res.json(users[email]);
 });
 
-app.get('/users', function (req, res) {
-	const scorelist = Object.values(users)
-		.sort((l, r) => r.score - l.score)
-		.map(user => {
-			return {
-				email: user.email,
-				age: user.age,
-				score: user.score
-			};
-		});
+app.get('/get/profile', function (req, res) {
+	const id = req.cookies['frontend'];
+	const email = ids[id];
+	if (!email || !users[email]) {
+		return res.status(401).end();
+	}
 
-	res.json(scorelist);
+	res.json({username: users[email].username,
+		email: email, score: users[email].score});
 });
+
+app.get('/logout', function (req, res) {
+	let id = req.cookies['frontend'];
+	const email = ids[id];
+	if (!email || !users[email]) {
+		return res.status(401).end();
+	}
+	ids[id] = '';
+	res.status(200).json({});
+});
+
+app.get('/users/', function (req, res) {
+	logger(req.query);
+	const countUsers = Number(req.query.countUsers);
+	const page = Number(req.query.page);
+	const head = (page - 1) * countUsers;
+	console.log(page + " " + countUsers);
+	let scorelist = Object.values(users).sort((l, r) => r.score - l.score);
+
+	const length = scorelist.length;
+	scorelist = scorelist.map((user) => {
+		return {
+			email: user.email,
+			username: user.username,
+			score: user.score
+		};
+	}).slice(head, head + countUsers);
+	console.log(scorelist);
+	res.json({scorelist: scorelist, length: length});
+});
+
 
 const port = process.env.PORT || 3000;
 

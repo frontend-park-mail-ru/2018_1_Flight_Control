@@ -14,12 +14,13 @@
     <section id="menu" hidden="true">
         <h1>FlightControl</h1>
         <ul>
-            <li><a href="#" data-section="start">Start</a></li>
-            <li><a href="#" data-section="profile">Profile</a></li>
-            <li><a href="#" data-section="signup">Registration</a></li>
-            <li><a href="#" data-section="signin">Login</a></li>
-            <li><a href="#" data-section="scoreboard">Scoreboard</a></li>
-            <li><a href="#" data-section="about">About</a></li>       
+            <li id="start-link"><a href="#" data-section="start">Start</a></li>
+            <li id="profile-link"><a href="#" data-section="profile">Profile</a></li>
+            <li id="logout-link"><a href="#" data-section="logout">Logout</a></li>
+            <li id="signup-link"><a href="#" data-section="signup">Registration</a></li>
+            <li id="signin-link"><a href="#" data-section="signin">Login</a></li>
+            <li id="scoreboard-link"><a href="#" data-section="scoreboard">Scoreboard</a></li>
+            <li id="about-link"><a href="#" data-section="about">About</a></li>
         </ul>
     </section>
 
@@ -36,14 +37,22 @@
 
     <section id="profile" hidden="true">
         <h1>Profile</h1>
+        <table><td>
+            <tr>Username: <nobr id="profile-username"></nobr></tr><br>
+            <tr>Email: <nobr id="profile-email"></nobr></tr><br>
+            <tr>Score <nobr id="profile-score"></nobr></tr><br>
+        </td></table>
         <form class="js-profile-form">
-            <div id="user_name"></div>
             <div id="validation_profile"></div>
-            <input required autocomplete="email" type="email" name="email" id="email2" placeholder="input you email here..">
-            <input required autocomplete="off" type="text" name="username" id="username2" placeholder="input you username here..">
-            <input required autocomplete="off" type="password" name="password" id="password2" placeholder="***********">
-            <input required autocomplete="off" type="password" name="password_repeat" id="password_repeat2" placeholder="***********">
-            <input class="js-profile-submit" type="submit">
+            <a hfref="#" id='change-profile-form' data-section="hide-profile-form">change profile</a>
+            <div id="profile-form" hidden="true">
+                <input required autocomplete="email" type="email" name="email" id="email2" placeholder="input you email here..">
+                <input required autocomplete="off" type="text" name="username" id="username2" placeholder="input you username here..">
+                <input required autocomplete="off" type="password" name="password" id="password2" placeholder="***********">
+                <input required autocomplete="off" type="password" name="password_repeat" id="password_repeat2" placeholder="***********">
+                <input type="file" name="img" id="img-change-profile" placeholder="path" accept="image/jpeg,image/png"/>
+                <input class="js-profile-submit" type="submit">
+            </div>
         </form>
         <a href="#" data-section="menu">Back</a>
     </section>
@@ -56,6 +65,7 @@
             <input required autocomplete="off" type="text" name="username" id="username" placeholder="input you username here..">
             <input required autocomplete="off" type="password" name="password" id="password" placeholder="***********">
             <input required autocomplete="off" type="password" name="password_repeat" id="password_repeat" placeholder="***********">
+            <input type="file" name="img" id="img-signup" placeholder="path" accept="image/jpeg,image/png"/>
             <input class="js-signup-submit" type="submit">
         </form>
         <a href="#" data-section="menu">Back</a>
@@ -73,10 +83,10 @@
         <a href="#" data-section="menu">Back</a>
     </section>
 
-    <section id="scoreboard" hidden="false">
+    <section id="scoreboard">
         <h1>Scoreboard</h1>
         <div class="js-scoreboard-table"></div>
-        <div id="pagination"></div>
+        <div class="js-scoreboard_paginator"></div>
         <a href="#" data-section="menu">В меню</a>
     </section>
 
@@ -85,8 +95,10 @@
 <script src="/js/utils/noop.js"></script>
 <script src="/js/utils/EScoreboardTypes.js"></script>
 <script src="/js/modules/http.js"></script>
-<script src="/js/components/Scoreboard/Scoreboard.tmpl.js"></script>
+
+<script src="/js/components/Scoreboard/scoreboard.tmpl.js"></script>
 <script src="/js/components/Scoreboard/Scoreboard.js"></script>
+<script src="/js/components/Scoreboard/paginator/paginator.tmpl.js"></script>
 <script src="/js/components/Scoreboard/paginator/paginator.js"></script>
 <script src="/js/application.js"></script>
 </body>
