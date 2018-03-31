@@ -4,6 +4,7 @@
   "description": "Study Project, developed in collaboration with students of Technopark",
   "main": "index.js",
   "scripts": {
+    "build": "",
     "start": "npm run build && DEBUG=mylogger node server",
     "start-api": "PORT=3000 DEBUG=mylogger node server",
     "start:raw": "node server"
