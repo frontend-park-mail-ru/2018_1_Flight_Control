@@ -1,16 +1,16 @@
 {
-  "name": "sample",
+  "name": "Flight_control",
   "version": "1.0.0",
   "description": "Study Project, developed in collaboration with students of Technopark",
   "main": "index.js",
   "scripts": {
     "start": "npm run build && DEBUG=mylogger node server",
-    "start:raw": "node server"
+    "start-api": "PORT=3000 DEBUG=mylogger node server",
+    "start:raw": "node server",
+    "develop": "npm run start & npm run start-api"
   },
   "contributors": [
-    "Dmitry Dorofeev",
-    "Ostapenko Anatoliy",
-    "Alexey Tyuldyukov"
+    "Alex Kuznetsov"
   ],
   "license": "MIT",
   "dependencies": {
