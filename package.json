@@ -4,7 +4,6 @@
   "description": "Study Project, developed in collaboration with students of Technopark",
   "main": "index.js",
   "scripts": {
-    "build": "fest-build --dir=public",
     "start": "npm run build && DEBUG=mylogger node server",
     "start:raw": "node server"
   },
@@ -19,12 +18,10 @@
     "cookie-parser": "^1.4.3",
     "debug": "^3.1.0",
     "express": "^4.16.2",
-    "fest": "^0.12.1",
     "morgan": "^1.9.0",
     "uuid": "^3.2.1"
   },
   "devDependencies": {
-    "fest": "^0.12.1",
     "pug": "^2.0.3"
   }
 }
