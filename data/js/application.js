@@ -88,7 +88,7 @@ function loadAllUsers(page = 1, countOnPage = 1) {
 //LOGIN
 function onSubmitSigninForm(evt) {
 	evt.preventDefault();
-	const fields = ['email', 'password'];
+	const fields = ['email', 'pass'];
 	const form = evt.currentTarget;
 	const formElements = form.elements;
 	const formdata = fields.reduce(function (allfields, fieldname) {
@@ -96,7 +96,7 @@ function onSubmitSigninForm(evt) {
 		return allfields;
 	}, {});
 
-	if (!isEmail(formdata['email']) || !isPassword(formdata['password'])) {
+	if (!isEmail(formdata['email']) || !isPassword(formdata['pass'])) {
         document.getElementById("validation_signin").innerHTML = "Email or Password incorrect!";
         return;
 	}
