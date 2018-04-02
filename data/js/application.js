@@ -103,7 +103,6 @@ function onSubmitSigninForm(evt) {
 
     console.info('Authorithation user', formdata);
 	loginUser(formdata)
-		.then(() => checkAuth())
 		.then(() => {
 			//hiddenSections(hideSectionOnClickSignin);
 			openSection('menu');
