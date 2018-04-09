@@ -21,9 +21,12 @@
   	class HttpModule {
 	    fetchGet({url = '/'} = {}) {
 	        return fetch(url, {
-                    method: 'GET',
-                    mode: 'cors',
-                    credentials: 'include'
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json; charset=utf-8'
+				},
+				mode: 'cors',
+				credentials: 'include'
             })
             .then(checkStatus)
             .then(json)
