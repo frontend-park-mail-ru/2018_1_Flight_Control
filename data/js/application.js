@@ -32,8 +32,8 @@ function showLinks(show) {
 	});
 }
 
-//const baseUrl = 'https://flightcontrol.herokuapp.com/api/user';
-const baseUrl = 'http://localhost:3000';
+const baseUrl = 'https://flightcontrol.herokuapp.com/api/user';
+//const baseUrl = 'http://localhost:3000';
 //const baseUrl = 'https://flight-control-test.herokuapp.com';
 
 const sections = {
