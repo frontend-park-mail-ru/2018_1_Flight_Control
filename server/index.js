@@ -99,8 +99,8 @@ app.post('/register', function (req, res) {
 });
 
 app.post('/authenticate', function (req, res) {
-	console.log(req.body.password);
-	const password = req.body.password;
+	console.log(req.body.pass);
+	const password = req.body.pass;
 	const email = req.body.email;
 	if (!password || !email) {
 		return res.status(400).json({error: 'Не указан E-Mail или пароль'});

@@ -1,16 +1,21 @@
 (function () {
 	const noop = () => null;
 
-	function checkStatus(response) {  
+	function checkStatus(response) {
         if (response.status >= 200 && response.status < 300) {
-            return Promise.resolve(response);
+            return response;
         } else {
             return Promise.reject(new Error(response.statusText));
         }
     }
 
-    function json(response) {  
-        return response.json();
+    function json(response) {
+		const contentType = response.headers.get("content-type");
+		if (contentType && contentType.indexOf("application/json") !== -1) {
+			return response.json();
+		} else {
+			return response.text();
+		}
     }
 
   	class HttpModule {
@@ -35,7 +40,7 @@
                 credentials: 'include',
                 body: JSON.stringify(formData)
             })
-            .then(checkStatus)
+			.then(checkStatus)
             .then(json)
             .catch( error => { throw error; });
 	    }
