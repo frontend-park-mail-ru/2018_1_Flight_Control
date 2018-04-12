@@ -137,10 +137,11 @@ function onSubmitSignupForm(evt) {
         allfields[fieldname] = formElements[fieldname].value;
         return allfields;
     }, {});*/
+	let formdata = new FormData();
 	formdata.append('email', formElements['email']);
 	formdata.append('password', formElements['password']);
 	formdata.append('username', formElements['username']);
-	formadata.append('img', formElements['img'].files[0]);
+	formdata.append('img', formElements['img'].files[0]);
 
     /*if (!isPassword(formdata['password']) || !isEmail(formdata['email'])
 		|| !isUsername(formdata['username'])){
