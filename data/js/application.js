@@ -137,11 +137,7 @@ function onSubmitSignupForm(evt) {
         allfields[fieldname] = formElements[fieldname].value;
         return allfields;
     }, {});*/
-	let formdata = new FormData();
-	formdata.append('email', formElements['email']);
-	formdata.append('password', formElements['password']);
-	formdata.append('username', formElements['username']);
-	formdata.append('img', formElements['img'].files[0]);
+
 
     /*if (!isPassword(formdata['password']) || !isEmail(formdata['email'])
 		|| !isUsername(formdata['username'])){
@@ -152,9 +148,13 @@ function onSubmitSignupForm(evt) {
 	if (formdata['password'] !== formdata['password_repeat']) {
         document.getElementById("validation_signup").innerHTML = "passwords not equal!";
         return;
-	}
+	}*/
+	let formdata = new FormData();
+	formdata.append('email', formElements['email']);
+	formdata.append('password', formElements['password']);
+	formdata.append('username', formElements['username']);
+	formdata.append('img', formElements['img'].files[0]);
 
-	console.info('Registration user', formdata);*/
 	signupUser(formdata)
 		.then(() => checkAuth())
 		.then(() => openSection('menu'))

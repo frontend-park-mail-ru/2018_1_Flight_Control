@@ -42,7 +42,7 @@
                 },
                 mode: 'cors',
                 credentials: 'include',
-                body: JSON.stringify(formData)
+                body: formData
             })
 			.then(checkStatus)
             .then(json)
