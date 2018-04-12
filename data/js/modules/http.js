@@ -36,10 +36,10 @@
 	    fetchPost({url = '/', formData = {}}) {
             return fetch(url, {
                 method: 'POST',
-                headers: {
+               /* headers: {
 					'Content-Type': 'multipart/form-data'
                     //'Content-Type': 'application/json; charset=utf-8'
-                },
+                },*/
                 mode: 'cors',
                 credentials: 'include',
                 body: formData
