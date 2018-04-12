@@ -129,16 +129,20 @@ function loginUser(user) {
 //REGISTRATION
 function onSubmitSignupForm(evt) {
     evt.preventDefault();
-    const fields = ['email', 'password', 'password_repeat', 'username', 'img'];
+    //const fields = ['email', 'password', 'password_repeat', 'username', 'img'];
     //const fields = ['email', 'password', 'password_repeat', 'username']
     const form = evt.currentTarget;
     const formElements = form.elements;
-    const formdata = fields.reduce(function (allfields, fieldname) {
+    /*const formdata = fields.reduce(function (allfields, fieldname) {
         allfields[fieldname] = formElements[fieldname].value;
         return allfields;
-    }, {});
+    }, {});*/
+	formdata.append('email', formElements['email']);
+	formdata.append('password', formElements['password']);
+	formdata.append('username', formElements['username']);
+	formadata.append('img', formElements['img'].files[0]);
 
-    if (!isPassword(formdata['password']) || !isEmail(formdata['email'])
+    /*if (!isPassword(formdata['password']) || !isEmail(formdata['email'])
 		|| !isUsername(formdata['username'])){
         	document.getElementById("validation_signup").innerHTML = "Email or Password incorrect!";
         	return;
@@ -149,7 +153,7 @@ function onSubmitSignupForm(evt) {
         return;
 	}
 
-	console.info('Registration user', formdata);
+	console.info('Registration user', formdata);*/
 	signupUser(formdata)
 		.then(() => checkAuth())
 		.then(() => openSection('menu'))
@@ -170,13 +174,18 @@ function signupUser(user) {
 //PROFILE
 function onSubmitProfileForm(evt) {
 	evt.preventDefault();
-    const fields = ['email', 'password', 'password_repeat', 'username', 'img'];
+	let formdata = new FormData();
+    //const fields = ['email', 'password', 'password_repeat', 'username']
     const form = evt.currentTarget;
     const formElements = form.elements;
-    const formdata = fields.reduce(function (allfields, fieldname) {
+    /*const formdata = fields.reduce(function (allfields, fieldname) {
         allfields[fieldname] = formElements[fieldname].value;
         return allfields;
-    }, {});
+    }, {});*/
+	formdata.append('email', formElements['email']);
+	formdata.append('password', formElements['password']);
+	formdata.append('username', formElements['username']);
+	formadata.append('img', formElements['img'].files[0]);
 
     if (!isPassword(formdata['password']) || !isEmail(formdata['email'])
         || !isUsername(formdata['username'])){
