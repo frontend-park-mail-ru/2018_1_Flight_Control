@@ -30,7 +30,7 @@
             })
             .then(checkStatus)
             .then(json)
-            .catch(error => { throw error; });
+            .catch( error => { throw error; });
 	    }
 
 	    fetchPost({url = '/', formData = {}}) {
