@@ -149,13 +149,13 @@ function onSubmitSignupForm(evt) {
         document.getElementById("validation_signup").innerHTML = "passwords not equal!";
         return;
 	}*/
-    let tmp = document.getElementById('img-signup');
-	let formdata = new FormData();
-	formdata.append('email', formElements['email'].value);
+    //let tmp = document.getElementById('img-signup');
+	let formdata = new FormData(form);
+	/*formdata.append('email', formElements['email'].value);
 	formdata.append('password', formElements['password'].value);
 	formdata.append('username', formElements['username'].value);
 	formdata.append('img', tmp.files[0]);
-
+*/
 	signupUser(formdata)
 		.then(() => checkAuth())
 		.then(() => openSection('menu'))
