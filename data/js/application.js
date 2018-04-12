@@ -152,7 +152,7 @@ function onSubmitSignupForm(evt) {
 	let formdata = new FormData();
 	formdata.append('email', formElements['email'].value);
 	formdata.append('password', formElements['password'].value);
-	formdata.append('username', formElements['username']).value;
+	formdata.append('username', formElements['username'].value);
 	formdata.append('img', formElements['img'].files[0]);
 
 	signupUser(formdata)
