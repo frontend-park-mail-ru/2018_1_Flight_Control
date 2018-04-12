@@ -81,7 +81,7 @@ function logoutUser() {
 
 function loadAllUsers(page = 1, countOnPage = 1) {
     return httpModule.fetchGet({
-        url: baseUrl + '/users?countUsers=' + countOnPage + '&page=' + page
+        url: baseUrl + '/leaders?page=' + page + '&size=' + countOnPage
     });
 }
 
@@ -132,7 +132,6 @@ function onSubmitSignupForm(evt) {
     //const fields = ['email', 'password', 'password_repeat', 'username', 'img'];
     //const fields = ['email', 'password', 'password_repeat', 'username']
     const form = evt.currentTarget;
-    console.log(evt.currentTarget)
     const formElements = form.elements;
     /*const formdata = fields.reduce(function (allfields, fieldname) {
         allfields[fieldname] = formElements[fieldname].value;
