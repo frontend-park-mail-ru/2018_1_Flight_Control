@@ -66,7 +66,7 @@ const users = {
 const ids = {};
 
 app.post('/register', function (req, res) {
-    console.log(req.body);
+    console.log(req);
 	const password = req.body.password;
 	const email = req.body.email;
 	const username = req.body.username;
