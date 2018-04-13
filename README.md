@@ -1,10 +1,10 @@
-#Flight-Control
-##front-end
+# Flight-Control
+## front-end
 https://flight-control-test.herokuapp.com/
 
-##back-end
+## back-end
 
-##Team
+## Team
 Alexander Movsesov
 Alexander Kuznetsov
 Sergey Malyshev
