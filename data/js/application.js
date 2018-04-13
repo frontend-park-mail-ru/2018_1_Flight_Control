@@ -11,6 +11,7 @@ const scoreboardSection = document.getElementById('scoreboard');
 const menuSection = document.getElementById('menu');
 const aboutSection = document.getElementById('about');
 const profileSection = document.getElementById('profile');
+const selectGameSection = document.getElementById('select-game');
 
 const subheader = document.getElementsByClassName('js-subheader')[0];
 const signupForm = document.getElementsByClassName('js-signup-form')[0];
@@ -42,7 +43,8 @@ const sections = {
 	scoreboard: scoreboardSection,
 	menu: menuSection,
 	about: aboutSection,
-	profile: profileSection
+	profile: profileSection,
+	selectGame: selectGameSection
 };
 
 //SCOREBOARD
@@ -177,7 +179,6 @@ function signupUser(user) {
 //PROFILE
 function onSubmitProfileForm(evt) {
 	evt.preventDefault();
-	let formdata = new FormData();
     //const fields = ['email', 'password', 'password_repeat', 'username']
     const form = evt.currentTarget;
     const formElements = form.elements;
@@ -185,7 +186,7 @@ function onSubmitProfileForm(evt) {
         allfields[fieldname] = formElements[fieldname].value;
         return allfields;
     }, {});*/
-	formdata.append('email', formElements['email']);
+	/*formdata.append('email', formElements['email']);
 	formdata.append('password', formElements['password']);
 	formdata.append('username', formElements['username']);
 	formadata.append('img', formElements['img'].files[0]);
@@ -199,7 +200,8 @@ function onSubmitProfileForm(evt) {
     if (formdata['password'] !== formdata['password_repeat']) {
         document.getElementById("validation_profile").innerHTML = "passwords not equal!";
         return;
-    }
+    }*/
+	let formdata = new FormData(form);
 
     console.info('change data user', formdata);
     changeProfileUser(formdata)
@@ -237,7 +239,7 @@ function checkAuth() {
 
 function loadMe() {
     return httpModule.fetchGet({
-        url: baseUrl + '/get'
+        url: baseUrl + '/logged'
     });
 }
 
