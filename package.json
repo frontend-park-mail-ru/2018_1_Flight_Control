@@ -1,0 +1,26 @@
+{
+  "name": "Flight_control",
+  "version": "1.0.0",
+  "description": "Study Project, developed in collaboration with students of Technopark",
+  "main": "index.js",
+  "scripts": {
+    "start": "DEBUG=mylogger node server",
+    "start-api": "PORT=3000 DEBUG=mylogger node server",
+    "start:raw": "node server"
+  },
+  "contributors": [
+    "Alex Kuznetsov"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "debug": "^3.1.0",
+    "express": "^4.16.2",
+    "morgan": "^1.9.0",
+    "uuid": "^3.2.1"
+  },
+  "devDependencies": {
+    "pug": "^2.0.3"
+  }
+}
