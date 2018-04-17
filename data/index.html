@@ -5,89 +5,112 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flight Control</title>
     <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" integrity="sha384-v2Tw72dyUXeU3y4aM2Y0tBJQkGfplr39mxZqlTBDUZAb9BGoC40+rdFCG0m10lXk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" integrity="sha384-q3jl8XQu1OpdLgGFvNRnPdj5VIlCvgsDQTQB6owSOHWlAurxul7f+JpUOVdAiJ5P" crossorigin="anonymous">
 </head>
 <body>
 <main id="application">
+    <div class="header">
+        <h1 class="game_name">Flight Control</h1>
+    </div>
+    <div class="content">
+        <section id="menu">
+            <ul>
+                <li id="start-link"><a href="#" class="main_btn" data-section="start">Start</a></li>
+                <li id="profile-link"><a href="#" class="main_btn" data-section="profile">Profile</a></li>
+                <li id="logout-link"><a href="#" class="main_btn" data-section="logout">Logout</a></li>
+                <li id="signup-link"><a href="#" class="main_btn" data-section="signup">Registration</a></li>
+                <li id="signin-link"><a href="#" class="main_btn" data-section="signin">Login</a></li>
+                <li id="scoreboard-link"><a href="#" class="main_btn" data-section="scoreboard">Scoreboard</a></li>
+                <li id="about-link"><a href="#" class="main_btn" data-section="about">About</a></li>
+            </ul>
+        </section>
 
-    <section id="menu" hidden="true">
-        <h1>FlightControl</h1>
-        <ul>
-            <li id="start-link"><a href="#" data-section="start">Start</a></li>
-            <li id="profile-link"><a href="#" data-section="profile">Profile</a></li>
-            <li id="logout-link"><a href="#" data-section="logout">Logout</a></li>
-            <li id="signup-link"><a href="#" data-section="signup">Registration</a></li>
-            <li id="signin-link"><a href="#" data-section="signin">Login</a></li>
-            <li id="scoreboard-link"><a href="#" data-section="scoreboard">Scoreboard</a></li>
-            <li id="about-link"><a href="#" data-section="about">About</a></li>
-        </ul>
-    </section>
+        <section id="start" hidden="true">
+            <h1>Select game</h1>
+            <a href="#" data-section="menu">Back</a>
+        </section>
 
-    <section id="start" hidden="true">
-        <h1>Select game</h1>
-        <a href="#" data-section="menu">Back</a>
-    </section>
+        <section id="about" hidden="true" class="content-box">
+            <a href="#" data-section="menu" class="back_btn"><i class="fa fa-arrow-left"></i></a>
+            <br/>
 
-    <section id="about" hidden="true">
-        <h1>About</h1>
-        <h3>About game</h3>
-        <a href="#" data-section="menu">Back</a>
-    </section>
+            <h1>About</h1>
+            <span>This game presents an airplane management.</span>
+        </section>
 
-    <section id="profile" hidden="true">
-        <h1>Profile</h1>
-        <table><td>
-            <tr>Username: <nobr id="profile-username"></nobr></tr><br>
-            <tr>Email: <nobr id="profile-email"></nobr></tr><br>
-            <tr>Score <nobr id="profile-score"></nobr></tr><br>
-        </td></table>
-        <form class="js-profile-form">
-            <div id="validation_profile"></div>
-            <a hfref="#" id='change-profile-form' data-section="hide-profile-form">change profile</a>
-            <div id="profile-form" hidden="true">
-                <input required autocomplete="email" type="email" name="email" id="email2" placeholder="input you email here..">
-                <input required autocomplete="off" type="text" name="username" id="username2" placeholder="input you username here..">
-                <input required autocomplete="off" type="password" name="password" id="password2" placeholder="***********">
-                <input required autocomplete="off" type="password" name="password_repeat" id="password_repeat2" placeholder="***********">
-                <input type="file" name="img" id="img-change-profile" placeholder="path" accept="image/jpeg,image/png"/>
-                <input class="js-profile-submit" type="submit">
-            </div>
-        </form>
-        <a href="#" data-section="menu">Back</a>
-    </section>
+        <section id="profile" hidden="true" class="profile-box">
+            <h1>Profile</h1>
+            <table><td>
+                <tr>Username: <nobr id="profile-username"></nobr></tr><br>
+                <tr>Email: <nobr id="profile-email"></nobr></tr><br>
+                <tr>Score <nobr id="profile-score"></nobr></tr><br>
+            </td></table>
+            <form class="js-profile-form">
+                <div id="validation_profile"></div>
+                <a hfref="#" id='change-profile-form' data-section="hide-profile-form">change profile</a>
+                <div id="profile-form" hidden="true">
+                    <input required autocomplete="email" type="email" name="email" id="email2" placeholder="input you email here..">
+                    <input required autocomplete="off" type="text" name="username" id="username2" placeholder="input you username here..">
+                    <input required autocomplete="off" type="password" name="password" id="password2" placeholder="***********">
+                    <input required autocomplete="off" type="password" name="password_repeat" id="password_repeat2" placeholder="***********">
+                    <input type="file" name="img" id="img-change-profile" placeholder="path" accept="image/jpeg,image/png"/>
+                    <input class="js-profile-submit" type="submit">
+                </div>
+            </form>
+            <a href="#" data-section="menu">Back</a>
+        </section>
 
-    <section id="signup" hidden="true">
-        <h1>Registration</h1>
-        <form class="js-signup-form">
-            <div id="validation_signup"></div>
-            <input required autocomplete="email" type="email" name="email" id="email" placeholder="input you email here..">
-            <input required autocomplete="off" type="text" name="username" id="username" placeholder="input you username here..">
-            <input required autocomplete="off" type="password" name="password" id="password" placeholder="***********">
-            <input required autocomplete="off" type="password" name="password_repeat" id="password_repeat" placeholder="***********">
-            <input type="file" name="img" id="img-signup" placeholder="path" accept="image/jpeg,image/png"/>
-            <input class="js-signup-submit" type="submit">
-        </form>
-        <a href="#" data-section="menu">Back</a>
-    </section>
+        <section id="signup" hidden="true" class="content-box">
+            <a href="#" data-section="menu" class="back_btn"><i class="fas fa-arrow-left"></i></a>
+            <h1>Registration</h1>
+            <form class="js-signup-form">
+                <div id="validation_signup"></div>
+                <div class="input_field">
+                    <label for="email_reg">E-mail:</label>
+                    <input id="email_reg" required autocomplete="email" type="email" name="email" id="email" placeholder="input you email here..">
+                </div>
+                <div class="input_field">
+                    <label for="email_reg">Username:</label>
+                    <input id="username_reg" required autocomplete="off" type="text" name="username" id="username" placeholder="input you username here..">
+                </div>
+                <div class="input_field">
+                    <label for="email_reg">Password:</label>
+                    <input id="pass_reg" required autocomplete="off" type="password" name="password" id="password" placeholder="***********">
+                </div>
+                <div class="input_field">
+                    <label for="repass_reg">Repeat password:</label>
+                    <input id="repass_reg" required autocomplete="off" type="password" name="password_repeat" id="password_repeat" placeholder="***********">
+                </div>
+                <input class="submit_field success_field js-signup-submit" type="submit" value="Submit">
+            </form>
+        </section>
 
 
-    <section id="signin" hidden="true">
-        <h1>Login</h1>
-        <form class="js-signin-form">
-            <div id="validation_signin"></div>
-            <input required autocomplete="email" type="email" name="email" id="email1" placeholder="input email here...">
-            <input required autocomplete="off" type="password" name="pass" id="password1" placeholder="***********">
-            <input required class="js-signin-submit" type="submit">
-        </form>
-        <a href="#" data-section="menu">Back</a>
-    </section>
+        <section id="signin" hidden="true" class="content-box">
+            <a href="#" data-section="menu" class="back_btn"><i class="fas fa-arrow-left"></i></a>
+            <h1>Login</h1>
+            <form class="js-signin-form">
+                <div id="validation_signin"></div>
+                <div class="input_field">
+                    <label for="email_in">E-mail:</label>
+                    <input id="email_in" required autocomplete="email" type="email" name="email" id="email1" placeholder="input email here...">
+                </div>
+                <div class="input_field">
+                    <label for="pass_in">Password:</label>
+                    <input id="pass_in" required autocomplete="off" type="password" name="password" id="password1" placeholder="***********">
+                </div>
+                <input required class="submit_field success_field js-signin-submit" type="submit" value="Submit">
+            </form>
+        </section>
 
-    <section id="scoreboard" hidden="true">
-        <h1>Scoreboard</h1>
-        <div class="js-scoreboard-table"></div>
-        <div class="js-scoreboard_paginator"></div>
-        <a href="#" data-section="menu">В меню</a>
-    </section>
-
+        <section id="scoreboard" hidden="true" class="content-box">
+            <h1>Scoreboard</h1>
+            <div class="js-scoreboard-table"></div>
+            <div class="js-scoreboard_paginator"></div>
+            <a href="#" data-section="menu">В меню</a>
+        </section>
+    </div>
 </main>
 
 <script src="/js/modules/http.js"></script>

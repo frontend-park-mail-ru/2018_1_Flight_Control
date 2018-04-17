@@ -215,7 +215,7 @@ function checkAuth() {
         .catch(() => {
 			hiddenLinks(linksAuth);
 			showLinks(linksLogout);
-			alert("Неавторизован")
+			// alert("Неавторизован")
 		});
 }
 
@@ -313,7 +313,10 @@ function showChangeForm() {
 }
 
 application.addEventListener('click', function (evt) {
-	const target = evt.target;
+	let target = evt.target;
+	if(target.tagName.toLowerCase() !== 'a' && evt.target.parentNode !== undefined) {
+		target = evt.target.parentNode;
+	}
 	if (target.tagName.toLowerCase() !== 'a' || target.name === 'paginator-link') {
 		return;
 	}
@@ -329,6 +332,7 @@ application.addEventListener('click', function (evt) {
 		showChangeForm();
 		return;
 	}
+
 
 	console.log(`Открываем секцию`, section);
 	openSection(section);

@@ -1,17 +1,189 @@
+@import url("https://fonts.googleapis.com/css?family=Merienda:700");
 @import url("./system-font.css");
 @import url("../js/components/Scoreboard/Scoreboard.css");
+
 
 html, body {
 	width: 100%;
 	height: 100%;
+	margin: auto;
+	font-family: 'system', Arial, sans-serif;
+	font-size: 20px;
+	background: url("../img/bg.png") no-repeat center;
+	background-clip:border-box;
+}
+
+main {
+	width:100%;
+	height:100%;
+	background-color:rgba(0,0,0,0.13);
+	margin: auto;
+	background-clip:border-box;
 	display: flex;
 	align-items: center;
 	justify-content: start;
 	flex-direction: column;
-	font-family: 'system', Arial, sans-serif;
-	font-size: 36px;
+}
+#application {
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	flex-direction: column;
+}
+#menu {
+	border-radius: 15px;
+	padding: 2px 20px;
+	background-color: rgba(255,255,255,0.35);
+	width: 100%;
+}
+#menu ul {
+	padding: 5px;
+}
+#menu li {
+	margin: 0;
+}
+#menu li a{
+	padding-left: auto;
+	padding-right: auto;
+}
+#menu li:last-of-type a{
+	margin-bottom: 0;
+}
+.game_name {
+	font-family: 'Merienda', cursive;
+	color: #E68617;
+	font-size: 5rem;
+}
+.content ul {
+	list-style: none none;
+	padding: 5px;
 }
 
+.content li a {
+	font-size: 2em;
+}
+.main_btn {
+	font-style: normal;
+	font-family: 'Merienda', cursive;
+	display: block;
+	background-color: rgba(71, 112, 140, 0.9);
+	border-radius: 20px;
+	text-align: center;
+	margin-bottom: 15px;
+	padding: 8px 10px;
+}
+.content-box {
+	border-radius: 15px;
+	padding: 10px 10px 20px;
+	background-color: rgba(255,255,255,0.5);
+	width: 100%;
+}
+
+.content-box h1 {
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	color: #0B262F;
+}
+.content-box form {
+	display: flex;
+	flex-direction: column;
+
+}
+.content-box .input_field {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	font-size: 20px;
+	color: white;
+	font-family: serif;
+	margin-bottom: 10px;
+}
+
+.content-box .input_field label {
+	text-align: center;
+	width: 50%;
+	color: black;
+}
+
+.content-box .input_field input {
+	padding: 10px 10px 10px 20px;
+	border:solid 1px #0B262F;
+	border-radius: 15px;
+	width: 50%;
+}
+.content-box .input_field:last-of-type {
+	margin-bottom: 15px;
+}
+.content-box .submit_field {
+	padding: 10px;
+	border: none;
+	border-radius: 15px;
+}
+.content-box .success_field {
+	background-color: #3F9B5E;
+	color: #e6e6e6;
+	font-family: 'Merienda', cursive;
+	font-size: 25px;
+}
+.content-box .back_btn {
+	text-align: left;
+
+}
+.profile-box {
+	border-radius: 10px;
+	background-color: rgba(0,0,0,0.7);
+	width: 100%;
+	font-size: 20px;
+	color:white;
+	padding: 10px 10px 10px 15px;
+}
+
+.profile-box h1 {
+	margin: 10px;
+}
+.profile-box .row {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	height: 100%;
+}
+a:hover, a:link {
+	text-decoration: none;
+}
+a:hover {
+	text-shadow: #fff 1px 1px 1px;
+}
+.warning a:hover, .warning a:link {
+	background-color: rgba(221, 110, 90, 0.9);
+	text-decoration: none;
+}
+a:active, a:visited, a:link {
+	color: #0B262F;
+}
+
+.header_color {
+	background-color: #E68617;
+}
+.main {
+	background-color: rgba(71, 112, 140, 0.9);
+}
+.register {
+	background-color: rgba(255,255,255,0.5);
+}
+.success {
+	background-color: rgba(125, 213, 156, 0.8);
+}
+.profile {
+	background-color: rgba(0,0,0,0.7);
+}
+.table {
+	background-color: rgba(71, 134, 155, 0.8);
+}
+.star {
+	background-color: #A58843;
+}
 button {
 	font-size: 24px;
 }
