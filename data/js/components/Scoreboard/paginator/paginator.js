@@ -1,20 +1,46 @@
-
 (function () {
+	/**
+	 * this class create paginator
+	 */
 	class PaginatorComponent {
+		/**
+		 * create scoreboard
+		 * @param {String} selector - where was created scoreboard
+		 */
 		constructor(selector = 'body') {
 			this._el = document.querySelector(selector);
 		}
+
+		/**
+		 * return count elements in scoreboard
+		 * @return {Number}
+		 */
 		get data() {
 			return this._length;
 		}
 
+		/**
+		 * set count elements in scoreboard
+		 * @param length
+		 */
 		set data(length) {
 			this._length = length;
 		}
 
+		/**
+		 * clear data paginator
+		 */
 		clear() {
 			this._el.innerHTML = '';
 		}
+
+		/**
+		 * render template and write in html
+		 * @param {Number} countOnPage - count page on one page
+		 * @param {Number} step - step visible pages
+		 * @param {Number} page - current page
+		 * @param {Function} callback - function callback for paginators links
+		 */
 		renderTmpl(countOnPage, step, page, callback) {
 			let count = 1;
 			if (count !== 0) {
