@@ -149,10 +149,10 @@ app.get('/logout', function (req, res) {
 	res.status(200).json({});
 });
 
-app.get('/users', function (req, res) {
+app.get('/leaders', function (req, res) {
 	logger(req.query);
-	const countUsers = Number(req.query.countUsers);
 	const page = Number(req.query.page);
+	const countUsers = Number(req.query.size);
 	const head = (page - 1) * countUsers;
 	console.log(page + " " + countUsers);
 	let scorelist = Object.values(users).sort((l, r) => r.score - l.score);
