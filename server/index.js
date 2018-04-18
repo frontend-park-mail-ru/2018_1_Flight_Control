@@ -99,9 +99,9 @@ app.post('/register', function (req, res) {
 });
 
 app.post('/authenticate', function (req, res) {
-	console.log(req.body.pass);
-	const password = req.body.pass;
+	console.log(req.body);
 	const email = req.body.email;
+	const password = req.body.pass;
 	if (!password || !email) {
 		return res.status(400).json({error: 'Не указан E-Mail или пароль'});
 	}

@@ -1,5 +1,5 @@
 @import url("./system-font.css");
-@import url("../js/components/Scoreboard/Scoreboard.css");
+@import url("../js/components/Scoreboard/scoreboard/Scoreboard.css");
 
 html, body {
 	width: 100%;

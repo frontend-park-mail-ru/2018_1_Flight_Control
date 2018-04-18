@@ -49,5 +49,4 @@
 	}
 
 	window.ScoreboardComponent = ScoreboardComponent;
-
 })();

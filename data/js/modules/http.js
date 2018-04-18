@@ -39,12 +39,36 @@
 	 */
 	class HttpModule {
 		/**
+		 * this contsructor set baseUrl
+		 * @param {String} baseUrl
+		 */
+		constructor(baseUrl) {
+			this._baseUrl = baseUrl;
+		}
+
+		/**
+		 * this function return string baseUrl
+		 * @returns {String} baseUrl
+		 */
+		getUrl() {
+			return this._baseUrl;
+		}
+
+		/**
+		 * this function set new baseUrl
+		 * @param {String} newUrl
+		 */
+		setUrl(newUrl) {
+			this._baseUrl = newUrl;
+		}
+
+		/**
 		 * Function HTTP get request
 		 * @param {String} url
 		 * @returns {Promise<Response>}
 		 */
 	    fetchGet({url = '/'} = {}) {
-	        return fetch(url, {
+	        return fetch(this._baseUrl + url, {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json; charset=utf-8'
@@ -63,16 +87,18 @@
 		 * @param {FormData} formData
 		 * @returns {Promise<Response>}
 		 */
-	    fetchPost({url = '/', formData = {}}) {
-            return fetch(url, {
+	    fetchPost({url = '/', formData = {}, isJson = false}) {
+			let contentType = {};
+			if(isJson) {
+				contentType["Content-Type"] = "application/json; charset=utf-8";
+			}
+
+            return fetch(this._baseUrl + url, {
                 method: 'POST',
-               /* headers: {
-					'Content-Type': 'multipart/form-data'
-                    //'Content-Type': 'application/json; charset=utf-8'
-                },*/
+                headers: contentType,
                 mode: 'cors',
                 credentials: 'include',
-                body: formData
+                body: JSON.stringify(formData)
             })
 			.then(checkStatus)
             .then(json)

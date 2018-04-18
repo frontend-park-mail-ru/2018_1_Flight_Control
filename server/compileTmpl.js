@@ -11,5 +11,5 @@ function compileTmpl(path, fileName, functionName, jsName)
 }
 
 compileTmpl("Scoreboard/paginator/", "paginator.tmpl.pug", "generatePaginator", "paginator.tmpl.js");
-compileTmpl("Scoreboard/", "scoreboard.tmpl.pug", "generateScoreboard", "scoreboard.tmpl.js");
+compileTmpl("Scoreboard/scoreboard/", "scoreboard.tmpl.pug", "generateScoreboard", "scoreboard.tmpl.js");
 

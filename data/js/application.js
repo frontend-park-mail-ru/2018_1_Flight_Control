@@ -1,6 +1,6 @@
 'use strict';
 
-const httpModule = new window.HttpModule();
+const userApi = new window.UserApi;
 const scoreboardComponent = new window.ScoreboardComponent('.js-scoreboard-table');
 const paginatorComponent = new window.PaginatorComponent('.js-scoreboard_paginator');
 
@@ -33,10 +33,6 @@ function showLinks(show) {
 	});
 }
 
-//const baseUrl = 'https://flightcontrol.herokuapp.com/api/user';
-const baseUrl = 'http://localhost:3000';
-//const baseUrl = 'https://flight-control-test.herokuapp.com';
-
 const sections = {
 	signup: signupSection,
 	signin: signinSection,
@@ -50,7 +46,7 @@ const sections = {
 //SCOREBOARD
 function openScoreboard(page = 1, countOnPage = 1, step = 2) {
     scoreboardComponent.clear();
-    loadAllUsers(page, countOnPage)
+    userApi.getLeaders(page, countOnPage)
         .then(users => {
 	    	console.log(users);
             console.dir(users);
@@ -61,30 +57,15 @@ function openScoreboard(page = 1, countOnPage = 1, step = 2) {
 			paginatorComponent.renderTmpl(countOnPage, step, page, openScoreboard);
         })
         .catch(err => console.error(err));
-    //scoreboardComponent.renderDOM();
-    //
 }
 
 function onLogout() {
-	logoutUser()
+	userApi.logoutUser()
 		.then(() => {
 			hiddenLinks(linksAuth);
 			showLinks(linksLogout);
 		})
 		.catch(err => console.error(err));
-}
-
-
-function logoutUser() {
-	return httpModule.fetchGet({
-		url: baseUrl + '/logout'
-	});
-}
-
-function loadAllUsers(page = 1, countOnPage = 1) {
-    return httpModule.fetchGet({
-        url: baseUrl + '/leaders?page=' + page + '&size=' + countOnPage
-    });
 }
 
 //LOGIN
@@ -98,132 +79,121 @@ function onSubmitSigninForm(evt) {
 		return allfields;
 	}, {});
 
-	if (!isEmail(formdata['email']) || !isPassword(formdata['pass'])) {
-        document.getElementById("validation_signin").innerHTML = "Email or Password incorrect!";
+	if (formdata['email'] === '' || formdata['pass'] === '') {
+		document.getElementById("validation_signin").innerHTML = "Empty input!";
+		return;
+	}
+	if (!userApi.isValidEmail(formdata['email'])) {
+        document.getElementById("validation_signin").innerHTML = "Email is incorrect!";
         return;
 	}
+	if (!userApi.isValidPassword(formdata['pass'])) {
+		document.getElementById("validation_signin").innerHTML = "Password is incorrect!";
+		return;
+	}
 
-    console.info('Authorithation user', formdata);
-	loginUser(formdata)
+	userApi.loginUser(formdata)
 		.then(() => {
 			hiddenLinks(linksLogout);
 			showLinks(linksAuth);
-
 			//checkAuth();
-			//hiddenLinks(hiddenLinks());
 			openSection('menu');
 		})
-		.catch(() => {
+		.catch((err) => {
 			signinForm.reset();
-            document.getElementById("validation_signin").innerHTML = "wrong email or password";
+            document.getElementById("validation_signin").innerHTML = err.error;
         });
 }
-
-function loginUser(user) {
-    return httpModule.fetchPost({
-        url: baseUrl + '/authenticate',
-        formData: user
-    });
-}
-
 //---------------------------------
 
 //REGISTRATION
 function onSubmitSignupForm(evt) {
     evt.preventDefault();
-    //const fields = ['email', 'password', 'password_repeat', 'username', 'img'];
-    //const fields = ['email', 'password', 'password_repeat', 'username']
     const form = evt.currentTarget;
     const formElements = form.elements;
-    /*const formdata = fields.reduce(function (allfields, fieldname) {
-        allfields[fieldname] = formElements[fieldname].value;
-        return allfields;
-    }, {});*/
 
-
-    /*if (!isPassword(formdata['password']) || !isEmail(formdata['email'])
-		|| !isUsername(formdata['username'])){
-        	document.getElementById("validation_signup").innerHTML = "Email or Password incorrect!";
-        	return;
+	if (formElements['email'].value === '' || formElements['password'].value === '' ||
+		formElements['username'].value === '' || formElements['password_repeat'] === '')
+	{
+		document.getElementById("validation_signup").innerHTML = "Empty input!";
+		return;
+	}
+    if (!userApi.isValidEmail(formElements['email'].value)) {
+		document.getElementById("validation_signup").innerHTML = "Email incorrect!";
+		return;
+	}
+	if (!userApi.isValidPassword(formElements['password'].value)) {
+		document.getElementById("validation_signup").innerHTML = 'Password incorrect!';
+		return;
+	}
+	if (formElements['password'].value !== formElements['password_repeat'].value) {
+		document.getElementById("validation_signup").innerHTML = 'Password not equal!';
+		return;
+	}
+	if (!userApi.isValidUsername(formElements['username'].value)) {
+		document.getElementById("validation_signup").innerHTML = 'Username incorrect!';
+		return;
 	}
 
-	if (formdata['password'] !== formdata['password_repeat']) {
-        document.getElementById("validation_signup").innerHTML = "passwords not equal!";
-        return;
-	}*/
-    let tmp = document.getElementById('img-signup');
-    console.log(tmp.files)
-	let formdata = new FormData(form);
-	/*formdata.append('email', formElements['email'].value);
-	formdata.append('password', formElements['password'].value);
-	formdata.append('username', formElements['username'].value);
-	formdata.append('img', tmp.files[0]);
-*/
-	signupUser(formdata)
+	userApi.registationUser(new FormData(form))
 		.then(() => checkAuth())
 		.then(() => openSection('menu'))
-		.catch(() => {
+		.catch((err) => {
 			signupForm.reset();
-			document.getElementById("validation_signup").innerHTML = "data incorrect!";
+			document.getElementById("validation_signup").innerHTML = err.error;
 		});
 
-}
-
-function signupUser(user) {
-    return httpModule.fetchPost({
-        url: baseUrl + '/register',
-        formData: user
-    });
 }
 //-------------------------------------------------
 //PROFILE
 function onSubmitProfileForm(evt) {
 	evt.preventDefault();
-    //const fields = ['email', 'password', 'password_repeat', 'username']
+    const fields = ['email', 'password', 'password_repeat', 'username', 'img']
     const form = evt.currentTarget;
     const formElements = form.elements;
-    /*const formdata = fields.reduce(function (allfields, fieldname) {
-        allfields[fieldname] = formElements[fieldname].value;
-        return allfields;
-    }, {});*/
-	/*formdata.append('email', formElements['email']);
-	formdata.append('password', formElements['password']);
-	formdata.append('username', formElements['username']);
-	formadata.append('img', formElements['img'].files[0]);
+    const formdata = fields.reduce(function (allfields, fieldname) {
+    	if (formElements[fieldname].value !== '') {
+			allfields[fieldname] = formElements[fieldname].value;
+			return allfields;
+		}
+    }, {});
 
-    if (!isPassword(formdata['password']) || !isEmail(formdata['email'])
-        || !isUsername(formdata['username'])){
-        document.getElementById("validation_profile").innerHTML = "Email or Password incorrect!";
-        return;
-    }
+	if (!formdata) {
+		document.getElementById("validation_profile").innerHTML = "Empty input!";
+		return;
+	}
 
-    if (formdata['password'] !== formdata['password_repeat']) {
-        document.getElementById("validation_profile").innerHTML = "passwords not equal!";
-        return;
-    }*/
-	let formdata = new FormData(form);
+	if (formdata['email'] !== undefined && !userApi.isValidEmail(formdata['email'])) {
+		document.getElementById("validation_signup").innerHTML = "Email incorrect!";
+		return;
+	}
+	if (formdata['password'] !== undefined && !userApi.isValidPassword(formdata['password'])) {
+		document.getElementById("validation_signup").innerHTML = 'Password incorrect!';
+		return;
+	}
+	if (formdata['password'] !== formdata['password_repeat']) {
+		document.getElementById("validation_signup").innerHTML = 'Password not equal!';
+		return;
+	}
+	if (formdata['username'] !== undefined && !userApi.isValidUsername(formdata['username'])) {
+		document.getElementById("validation_signup").innerHTML = 'Username incorrect!';
+		return;
+	}
 
-    console.info('change data user', formdata);
-    changeProfileUser(formdata)
+    userApi.changeProfileUser(formdata)
         .then(() => openSection('menu'))
-        .catch(() => {
+        .catch((err) => {
             profileForm.reset();
-            document.getElementById("validation_profile").innerHTML = "data incorrect!";
+            document.getElementById("validation_profile").innerHTML = err.error;
         });
 
 }
 
-function changeProfileUser(user) {
-    return httpModule.fetchPost({
-        url: baseUrl + '/change',
-        formData: user
-    });
-}
 //-----------------------------------------------------
 //check cookie login
 
 function checkAuth() {
-    return loadMe()
+    return userApi.checkAuth()
         .then(me => {
 			alert(me.username);
 			hiddenLinks(linksLogout);
@@ -237,46 +207,10 @@ function checkAuth() {
 		});
 }
 
-function loadMe() {
-    return httpModule.fetchGet({
-        url: baseUrl + '/logged'
-    });
-}
-
-//-------------------------------------------------
-//Check valid data
-function isPassword(password) {
-    if (!password.match(/^[a-zA-Z0-9]+$/)) {
-        return false;
-    }
-    return true;
-}
-
-function isEmail(email) {
-    //email.match(/^[0-9a-z-\.]+\@[0-9a-z-]{2,}\.[a-z]{2,}$/i)
-    if (!email.match(/^[-._a-z0-9]+@(?:[a-z0-9][-a-z0-9]+\.)+[a-z]{2,6}$/) ) {
-        return false;
-    }
-    return true;
-}
-
-function isUsername(username) {
-    if (!username.match(/^[a-zA-Z0-9]+$/)) {
-        return false;
-    }
-    return true;
-}
-
 //-----------------------------------------------------
 
-function loadUser() {
-	return httpModule.fetchGet({
-		url: baseUrl + '/get/profile'
-	});
-}
-
 function loadProfile() {
-	loadUser()
+	userApi.loadUser()
 		.then((user) => {
 			document.getElementById('profile-username').innerText = user.username;
 			document.getElementById('profile-email').innerText = user.email;
