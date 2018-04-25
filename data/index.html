@@ -40,25 +40,72 @@
         </section>
 
         <section id="profile" hidden="true" class="profile-box">
-            <h1>Profile</h1>
-            <table><td>
-                <tr>Username: <nobr id="profile-username"></nobr></tr><br>
-                <tr>Email: <nobr id="profile-email"></nobr></tr><br>
-                <tr>Score <nobr id="profile-score"></nobr></tr><br>
-            </td></table>
-            <form class="js-profile-form">
-                <div id="validation_profile"></div>
-                <a hfref="#" id='change-profile-form' data-section="hide-profile-form">change profile</a>
-                <div id="profile-form" hidden="true">
-                    <input required autocomplete="email" type="email" name="email" id="email2" placeholder="input you email here..">
-                    <input required autocomplete="off" type="text" name="username" id="username2" placeholder="input you username here..">
-                    <input required autocomplete="off" type="password" name="password" id="password2" placeholder="***********">
-                    <input required autocomplete="off" type="password" name="password_repeat" id="password_repeat2" placeholder="***********">
-                    <input type="file" name="img" id="img-change-profile" placeholder="path" accept="image/jpeg,image/png"/>
-                    <input class="js-profile-submit" type="submit">
+            <div class="row main_header">
+                <h1>Личный кабинет: <nobr id="profile-username">Василий</nobr></h1>
+            </div>
+            <div class="row profile-header">
+                <div class="col-3">
+                    <h1  class="profile_header_title">Аватар</h1>
+                    <img width="100%" src="img/avatar.png">
                 </div>
-            </form>
-            <a href="#" data-section="menu">Back</a>
+                <div class="col-5">
+                    <h1 class="profile_header_title">Рейтинг</h1>
+                    <div class="row justify-span">
+                        <span class="profile_text">В таблице рейтинга:</span>
+                        &nbsp;
+                        <span class="profile_text balloon">5</span>
+                        &nbsp;
+                        <span class="profile_text">место</span>
+                    </div>
+                    <hr/>
+                    <div class="row justify-span">
+                        <span class="profile_text balloon">10.000</span>
+                        &nbsp;
+                        <span class="profile_text">очков</span>
+                    </div>
+                    <hr/>
+                    <div class="row justify-span">
+                        <span class="profile_text balloon">20/30</span>
+                        &nbsp;
+                        <span class="profile_text">побед</span>
+                    </div>
+                    <hr/>
+                    <h1 class="profile_header_title">Звание</h1>
+                    <div class="row justify-span" >
+                        <img id="rank" width="35%" src="img/captain_rank.png">
+                    </div>
+                    <div class="row justify-span">
+                        <span class="profile_text">Полковник</span>
+                    </div>
+                </div>
+            </div>
+            <hr/>
+            <div style="width: 100%;display:flex;justify-content:space-around;flex-direction:row">
+                <ul style="width:30%">
+                    <li><a class="profile_btn profile_success_field" href="#" data-section="start"><span class="menu_link">Одиночная игра</span></a></li>
+                    <li><a class="profile_btn profile_success_field" href="#" data-section="start"><span class="menu_link">Мультиплеер</span></a></li>
+                    <li><a class="profile_btn" href="#" data-section="signin"><span class="menu_link">Таблица лидеров</span></a></li>
+                </ul>
+                <ul style="width:30%">
+                    <li><a class="profile_btn" href="#" data-section="about"><span class="menu_link">Инструкция</span></a></li>
+                    <li><a class="profile_btn" href="#" data-section="about"><span class="menu_link">Редактировать</span></a></li>
+                    <li><a class="profile_btn warning_field" href="#" data-section="signup"><span class="menu_link">Выйти</span></a></li>
+                </ul>
+            </div>
+
+            <!--<form class="js-profile-form">-->
+                <!--<div id="validation_profile"></div>-->
+                <!--<a hfref="#" id='change-profile-form' data-section="hide-profile-form">change profile</a>-->
+                <!--<div id="profile-form" hidden="true">-->
+                    <!--<input required autocomplete="email" type="email" name="email" id="email2" placeholder="input you email here..">-->
+                    <!--<input required autocomplete="off" type="text" name="username" id="username2" placeholder="input you username here..">-->
+                    <!--<input required autocomplete="off" type="password" name="password" id="password2" placeholder="***********">-->
+                    <!--<input required autocomplete="off" type="password" name="password_repeat" id="password_repeat2" placeholder="***********">-->
+                    <!--<input type="file" name="img" id="img-change-profile" placeholder="path" accept="image/jpeg,image/png"/>-->
+                    <!--<input class="js-profile-submit" type="submit">-->
+                <!--</div>-->
+            <!--</form>-->
+            <!--<a href="#" data-section="menu">Back</a>-->
         </section>
 
         <section id="signup" hidden="true" class="content-box">
@@ -71,16 +118,20 @@
                     <input id="email_reg" required autocomplete="email" type="email" name="email" id="email" placeholder="input you email here..">
                 </div>
                 <div class="input_field">
-                    <label for="email_reg">Username:</label>
+                    <label for="username_reg">Username:</label>
                     <input id="username_reg" required autocomplete="off" type="text" name="username" id="username" placeholder="input you username here..">
                 </div>
                 <div class="input_field">
-                    <label for="email_reg">Password:</label>
+                    <label for="pass_reg">Password:</label>
                     <input id="pass_reg" required autocomplete="off" type="password" name="password" id="password" placeholder="***********">
                 </div>
                 <div class="input_field">
                     <label for="repass_reg">Repeat password:</label>
                     <input id="repass_reg" required autocomplete="off" type="password" name="password_repeat" id="password_repeat" placeholder="***********">
+                </div>
+                <div class="input_field">
+                    <label for="img-signup">Upload an image:</label>
+                    <input id="img-signup" autocomplete="off" type="file" name="img" >
                 </div>
                 <input class="submit_field success_field js-signup-submit" type="submit" value="Submit">
             </form>
@@ -105,10 +156,10 @@
         </section>
 
         <section id="scoreboard" hidden="true" class="content-box">
-            <h1>Scoreboard</h1>
+            <a href="#" data-section="menu" class="back_btn"><i class="fas fa-arrow-left"></i></a>
+            <h1>Leaderboard</h1>
             <div class="js-scoreboard-table"></div>
-            <div class="js-scoreboard_paginator"></div>
-            <a href="#" data-section="menu">В меню</a>
+            <!--<div class="js-scoreboard_paginator"></div>-->
         </section>
     </div>
 </main>

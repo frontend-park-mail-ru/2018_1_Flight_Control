@@ -1,7 +1,7 @@
+
 if (page > 1)
 	a(href='' class='scoreboard__paginator-left' name='paginator-link' value=page - 1)= '<'
-else
-	|<
+
 
 case page
 	when 1
@@ -55,5 +55,4 @@ case page
 
 if (page < count)
 	a(href='' class='scoreboard__paginator-right' name='paginator-link' value=page + 1)= '>'
-else
-	|>
+

@@ -27,9 +27,9 @@ pug_html = pug_html + (pug_escape(null == (pug_interp = 'Rang') ? "" : pug_inter
 ;pug_debug_line = 8;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
 pug_html = pug_html + "\u003Ctbody\u003E";
 ;pug_debug_line = 9;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
-// iterate data.leaders
+// iterate data
 ;(function(){
-  var $$obj = data.leaders;
+  var $$obj = data;
   if ('number' == typeof $$obj.length) {
       for (var index = 0, $$l = $$obj.length; index < $$l; index++) {
         var value = $$obj[index];
@@ -53,13 +53,8 @@ pug_html = pug_html + "\u003Ctd\u003E";
 pug_html = pug_html + (pug_escape(null == (pug_interp = value.rate) ? "" : pug_interp)) + "\u003C\u002Ftd\u003E";
 ;pug_debug_line = 15;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
 pug_html = pug_html + "\u003Ctd\u003E";
-;pug_debug_line = 16;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
-for (var index = 0; index < value.rate; index++)
-{
-;pug_debug_line = 17;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
-pug_html = pug_html + "\u003Ci class=\"fas fa-star\"\u003E\u003C\u002Fi\u003E";
-}
-pug_html = pug_html + "\u003C\u002Ftd\u003E\u003C\u002Ftr\u003E";
+;pug_debug_line = 15;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
+pug_html = pug_html + (pug_escape(null == (pug_interp = '<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>') ? "" : pug_interp)) + "\u003C\u002Ftd\u003E\u003C\u002Ftr\u003E";
       }
   } else {
     var $$l = 0;
@@ -86,13 +81,8 @@ pug_html = pug_html + "\u003Ctd\u003E";
 pug_html = pug_html + (pug_escape(null == (pug_interp = value.rate) ? "" : pug_interp)) + "\u003C\u002Ftd\u003E";
 ;pug_debug_line = 15;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
 pug_html = pug_html + "\u003Ctd\u003E";
-;pug_debug_line = 16;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
-for (var index = 0; index < value.rate; index++)
-{
-;pug_debug_line = 17;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
-pug_html = pug_html + "\u003Ci class=\"fas fa-star\"\u003E\u003C\u002Fi\u003E";
-}
-pug_html = pug_html + "\u003C\u002Ftd\u003E\u003C\u002Ftr\u003E";
+;pug_debug_line = 15;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
+pug_html = pug_html + (pug_escape(null == (pug_interp = '<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>') ? "" : pug_interp)) + "\u003C\u002Ftd\u003E\u003C\u002Ftr\u003E";
     }
   }
 }).call(this);

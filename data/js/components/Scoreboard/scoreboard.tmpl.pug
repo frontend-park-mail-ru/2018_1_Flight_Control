@@ -1,7 +1,17 @@
 table.scoreboard__table
+	thead
+		th='№'
+		th='Имя'
+		th='Счет'
+		th='Победы'
+		th='Рейтинг'
 	tbody
-		each value, index in data
+		each value, index in data.leaders
 			tr.scoreboard__row
 				td= value.email
-				td= value.username
-				td= value.score
+				td= value.name
+				td= value.rate
+				td= value.rate
+				td
+					- for (var index = 0; index < value.rate; index++)
+						i.fas.fa-star

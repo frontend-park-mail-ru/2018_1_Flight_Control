@@ -11,6 +11,7 @@ const scoreboardSection = document.getElementById('scoreboard');
 const menuSection = document.getElementById('menu');
 const aboutSection = document.getElementById('about');
 const profileSection = document.getElementById('profile');
+const selectGameSection = document.getElementById('start');
 
 const subheader = document.getElementsByClassName('js-subheader')[0];
 const signupForm = document.getElementsByClassName('js-signup-form')[0];
@@ -32,8 +33,8 @@ function showLinks(show) {
 	});
 }
 
-const baseUrl = 'https://flightcontrol.herokuapp.com/api/user';
-//const baseUrl = 'http://localhost:3000';
+// const baseUrl = 'https://flightcontrol.herokuapp.com/api/user';
+const baseUrl = 'http://localhost:8080/api/user';
 //const baseUrl = 'https://flight-control-test.herokuapp.com';
 
 const sections = {
@@ -42,25 +43,26 @@ const sections = {
 	scoreboard: scoreboardSection,
 	menu: menuSection,
 	about: aboutSection,
-	profile: profileSection
+	profile: profileSection,
+	selectGame: selectGameSection
 };
 
 //SCOREBOARD
-function openScoreboard(page = 1, countOnPage = 1, step = 2) {
-    scoreboardComponent.clear();
-    loadAllUsers(page, countOnPage)
-        .then(users => {
-	    	console.log(users);
-            console.dir(users);
-            scoreboardComponent.data = users.scorelist;
-            //scoreboardComponent.renderString();
+function openScoreboard(page = 1, countOnPage = 5, step = 5) {
+	scoreboardComponent.clear();
+	loadAllUsers(page, countOnPage)
+		.then(users => {
+			console.log(users);
+			console.dir(users);
+			scoreboardComponent.data = users;
+			//scoreboardComponent.renderString();
 			scoreboardComponent.renderTmpl();
 			paginatorComponent.data = users.length;
 			paginatorComponent.renderTmpl(countOnPage, step, page, openScoreboard);
-        })
-        .catch(err => console.error(err));
-    //scoreboardComponent.renderDOM();
-    //
+		})
+		.catch(err => console.error(err));
+	//scoreboardComponent.renderDOM();
+	//
 }
 
 function onLogout() {
@@ -74,21 +76,27 @@ function onLogout() {
 
 
 function logoutUser() {
-	return httpModule.fetchGet({
-		url: baseUrl + '/logout'
+	return httpModule.fetchPost({
+		url: baseUrl + '/logout',
+		isJson: true
 	});
 }
 
 function loadAllUsers(page = 1, countOnPage = 1) {
-    return httpModule.fetchGet({
-        url: baseUrl + '/users?countUsers=' + countOnPage + '&page=' + page
-    });
+	return httpModule.fetchPost({
+		url: baseUrl + '/leaders',
+		formData: {
+			page: page,
+		    size:countOnPage
+		},
+		isJson: true
+	});
 }
 
 //LOGIN
 function onSubmitSigninForm(evt) {
 	evt.preventDefault();
-	const fields = ['email', 'pass'];
+	const fields = ['email_in', 'pass_in'];
 	const form = evt.currentTarget;
 	const formElements = form.elements;
 	const formdata = fields.reduce(function (allfields, fieldname) {
@@ -96,83 +104,154 @@ function onSubmitSigninForm(evt) {
 		return allfields;
 	}, {});
 
-	if (!isEmail(formdata['email']) || !isPassword(formdata['pass'])) {
-        document.getElementById("validation_signin").innerHTML = "Email or Password incorrect!";
-        return;
+	if (!isEmail(formdata['email_in']) || !isPassword(formdata['pass_in'])) {
+		document.getElementById("validation_signin").innerHTML = "Email or Password incorrect!";
+		return;
 	}
-
-    console.info('Authorithation user', formdata);
-	loginUser(formdata)
+	const postData = {
+		'email': formdata['email_in'],
+		'pass': formdata['pass_in']
+	};
+	console.info('Authorithation user', postData);
+	loginUser(postData)
 		.then(() => {
-			//hiddenSections(hideSectionOnClickSignin);
+			hiddenLinks(linksLogout);
+			showLinks(linksAuth);
+
+			//checkAuth();
+			//hiddenLinks(hiddenLinks());
 			openSection('menu');
 		})
 		.catch(() => {
 			signinForm.reset();
-            document.getElementById("validation_signin").innerHTML = "wrong email or password";
-        });
+			document.getElementById("validation_signin").innerHTML = "wrong email or password";
+		});
 }
 
 function loginUser(user) {
-    return httpModule.fetchPost({
-        url: baseUrl + '/authenticate',
-        formData: user
-    });
+	return httpModule.fetchPost({
+		url: baseUrl + '/authenticate',
+		formData: user,
+		isJson: true
+	});
 }
 
 //---------------------------------
 
 //REGISTRATION
 function onSubmitSignupForm(evt) {
-    evt.preventDefault();
-    //const fields = ['email', 'password', 'password_repeat', 'username', 'img'];
-    const fields = ['email', 'password', 'password_repeat', 'username']
-    const form = evt.currentTarget;
-    const formElements = form.elements;
-    const formdata = fields.reduce(function (allfields, fieldname) {
+	evt.preventDefault();
+	//const fields = ['email', 'password', 'password_repeat', 'username', 'img'];
+	//const fields = ['email', 'password', 'password_repeat', 'username']
+	const form = evt.currentTarget;
+	const formElements = form.elements;
+	/*const formdata = fields.reduce(function (allfields, fieldname) {
         allfields[fieldname] = formElements[fieldname].value;
         return allfields;
-    }, {});
+    }, {});*/
 
-    if (!isPassword(formdata['password']) || !isEmail(formdata['email'])
-		|| !isUsername(formdata['username'])){
-        	document.getElementById("validation_signup").innerHTML = "Email or Password incorrect!";
-        	return;
-	}
 
-	if (formdata['password'] !== formdata['password_repeat']) {
+	/*if (!isPassword(formdata['password']) || !isEmail(formdata['email'])
+        || !isUsername(formdata['username'])){
+            document.getElementById("validation_signup").innerHTML = "Email or Password incorrect!";
+            return;
+    }
+
+    if (formdata['password'] !== formdata['password_repeat']) {
         document.getElementById("validation_signup").innerHTML = "passwords not equal!";
         return;
-	}
+    }*/
+	let tmp = document.getElementById('img-signup');
+	console.log(tmp.files)
+	let formdata = new FormData(form);
+	/*formdata.append('email', formElements['email'].value);
+	formdata.append('password', formElements['password'].value);
+	formdata.append('username', formElements['username'].value);
+	formdata.append('img', tmp.files[0]);
+*/
+	const fieldsMap = {
+		"email" : {
+			"id":"email_reg",
+			"default" : "E-mail"
+		},
+		"name" : {
+			"id":"username_reg",
+			"default" : "Username"
+		},
+		"pass" : {
+			"id":"pass_reg",
+			"default" : "Password"
+		},
+		"repass" : {
+			"id":"repass_reg",
+			"default" : "Repeat password"
+		}
+	};
 
-	console.info('Registration user', formdata);
+	function updateLabels() {
+		const labels = document.getElementsByTagName('LABEL');
+		for (let i = 0; i < labels.length; i++) {
+			if (labels[i].htmlFor !== '') {
+				let elem = document.getElementById(labels[i].htmlFor);
+				if (elem)
+					elem.label = labels[i];
+			}
+		}
+	}
 	signupUser(formdata)
 		.then(() => checkAuth())
 		.then(() => openSection('menu'))
-		.catch(() => {
+		.catch((exception) => {
+			updateLabels();
 			signupForm.reset();
-			document.getElementById("validation_signup").innerHTML = "data incorrect!";
+			for(let field in fieldsMap) {
+				let input = document.getElementById(fieldsMap[field]["id"]);
+				input.style.borderColor = 'rgba(0, 0, 0)';
+				let label = input.label;
+				label.innerHTML = fieldsMap[field]["default"];
+			}
+			return exception.body;
+		})
+		.then((body) => {
+			try {
+				body = JSON.parse(body);
+				if (body != null) {
+					if ("fieldName" in body && "errorMessage" in body) {
+						if(body["fieldName"] in fieldsMap) {
+							const el = document.getElementById(fieldsMap[body["fieldName"]]["id"]);
+							el.style.borderColor = 'rgba(221, 110, 90)';
+							el.label.innerHTML = body["errorMessage"];
+						}
+					}
+				}
+			} catch (e) {
+				console.log("not json");
+			}
 		});
 
 }
 
 function signupUser(user) {
-    return httpModule.fetchPost({
-        url: baseUrl + '/register',
-        formData: user
-    });
+	return httpModule.fetchPost({
+		url: baseUrl + '/register',
+		formData: user
+	});
 }
 //-------------------------------------------------
 //PROFILE
 function onSubmitProfileForm(evt) {
 	evt.preventDefault();
-    const fields = ['email', 'password', 'password_repeat', 'username', 'img'];
-    const form = evt.currentTarget;
-    const formElements = form.elements;
-    const formdata = fields.reduce(function (allfields, fieldname) {
+	//const fields = ['email', 'password', 'password_repeat', 'username']
+	const form = evt.currentTarget;
+	const formElements = form.elements;
+	/*const formdata = fields.reduce(function (allfields, fieldname) {
         allfields[fieldname] = formElements[fieldname].value;
         return allfields;
-    }, {});
+    }, {});*/
+	/*formdata.append('email', formElements['email']);
+	formdata.append('password', formElements['password']);
+	formdata.append('username', formElements['username']);
+	formadata.append('img', formElements['img'].files[0]);
 
     if (!isPassword(formdata['password']) || !isEmail(formdata['email'])
         || !isUsername(formdata['username'])){
@@ -183,70 +262,69 @@ function onSubmitProfileForm(evt) {
     if (formdata['password'] !== formdata['password_repeat']) {
         document.getElementById("validation_profile").innerHTML = "passwords not equal!";
         return;
-    }
+    }*/
+	let formdata = new FormData(form);
 
-    console.info('change data user', formdata);
-    changeProfileUser(formdata)
-        .then(() => openSection('menu'))
-        .catch(() => {
-            profileForm.reset();
-            document.getElementById("validation_profile").innerHTML = "data incorrect!";
-        });
+	console.info('change data user', formdata);
+	changeProfileUser(formdata)
+		.then(() => openSection('menu'))
+		.catch(() => {
+			profileForm.reset();
+			document.getElementById("validation_profile").innerHTML = "data incorrect!";
+		});
 
 }
 
 function changeProfileUser(user) {
-    return httpModule.fetchPost({
-        url: baseUrl + '/change',
-        formData: user
-    });
+	return httpModule.fetchPost({
+		url: baseUrl + '/change',
+		formData: user
+	});
 }
 //-----------------------------------------------------
 //check cookie login
 
 function checkAuth() {
-    return loadMe()
-        .then(me => {
-			alert(me.username);
+	return loadMe()
+		.then(me => {
 			hiddenLinks(linksLogout);
 			showLinks(linksAuth);
 			//document.getElementById("user_name").innerHTML = me.username;
 		})
-        .catch(() => {
+		.catch(() => {
 			hiddenLinks(linksAuth);
 			showLinks(linksLogout);
-			// alert("Неавторизован")
 		});
 }
 
 function loadMe() {
-    return httpModule.fetchGet({
-        url: baseUrl + '/get'
-    });
+	return httpModule.fetchGet({
+		url: baseUrl + '/logged'
+	});
 }
 
 //-------------------------------------------------
 //Check valid data
 function isPassword(password) {
-    if (!password.match(/^[a-zA-Z0-9]+$/)) {
-        return false;
-    }
-    return true;
+	if (!password.match(/^[a-zA-Z0-9]+$/)) {
+		return false;
+	}
+	return true;
 }
 
 function isEmail(email) {
-    //email.match(/^[0-9a-z-\.]+\@[0-9a-z-]{2,}\.[a-z]{2,}$/i)
-    if (!email.match(/^[-._a-z0-9]+@(?:[a-z0-9][-a-z0-9]+\.)+[a-z]{2,6}$/) ) {
-        return false;
-    }
-    return true;
+	//email.match(/^[0-9a-z-\.]+\@[0-9a-z-]{2,}\.[a-z]{2,}$/i)
+	if (!email.match(/^[-._a-z0-9]+@(?:[a-z0-9][-a-z0-9]+\.)+[a-z]{2,6}$/) ) {
+		return false;
+	}
+	return true;
 }
 
 function isUsername(username) {
-    if (!username.match(/^[a-zA-Z0-9]+$/)) {
-        return false;
-    }
-    return true;
+	if (!username.match(/^[a-zA-Z0-9]+$/)) {
+		return false;
+	}
+	return true;
 }
 
 //-----------------------------------------------------
@@ -280,12 +358,12 @@ const openFunctions = {
 		signinForm.reset();
 		signinForm.addEventListener('submit', onSubmitSigninForm);
 	},
-	profile: function () {
-        profileForm.removeEventListener('submit', onSubmitProfileForm);
-        profileForm.reset();
-        loadProfile();
-        profileForm.addEventListener('submit', onSubmitProfileForm);
-    }
+	// profile: function () {
+	// 	profileForm.removeEventListener('submit', onSubmitProfileForm);
+	// 	profileForm.reset();
+	// 	loadProfile();
+	// 	profileForm.addEventListener('submit', onSubmitProfileForm);
+	// }
 };
 
 function openSection(name) {
@@ -314,8 +392,8 @@ function showChangeForm() {
 
 application.addEventListener('click', function (evt) {
 	let target = evt.target;
-	if(target.tagName.toLowerCase() !== 'a' && evt.target.parentNode !== undefined) {
-		target = evt.target.parentNode;
+	if(target.tagName.toLowerCase() !== 'a' && target.parentNode.tagName.toLowerCase() === 'a') {
+		target = target.parentNode;
 	}
 	if (target.tagName.toLowerCase() !== 'a' || target.name === 'paginator-link') {
 		return;
@@ -332,7 +410,6 @@ application.addEventListener('click', function (evt) {
 		showChangeForm();
 		return;
 	}
-
 
 	console.log(`Открываем секцию`, section);
 	openSection(section);

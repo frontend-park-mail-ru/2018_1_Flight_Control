@@ -66,7 +66,7 @@ const users = {
 const ids = {};
 
 app.post('/register', function (req, res) {
-    console.log(req.body);
+	console.log(req);
 	const password = req.body.password;
 	const email = req.body.email;
 	const username = req.body.username;
@@ -99,8 +99,8 @@ app.post('/register', function (req, res) {
 });
 
 app.post('/authenticate', function (req, res) {
-	console.log(req.body.password);
-	const password = req.body.password;
+	console.log(req.body.pass);
+	const password = req.body.pass;
 	const email = req.body.email;
 	if (!password || !email) {
 		return res.status(400).json({error: 'Не указан E-Mail или пароль'});
@@ -124,7 +124,7 @@ app.get('/get', function (req, res) {
 	}
 
 	users[email].score += 1;
-    //res.json({username: users[email].username});
+	//res.json({username: users[email].username});
 	res.json(users[email]);
 });
 
@@ -149,10 +149,10 @@ app.get('/logout', function (req, res) {
 	res.status(200).json({});
 });
 
-app.get('/users', function (req, res) {
+app.get('/leaders', function (req, res) {
 	logger(req.query);
-	const countUsers = Number(req.query.countUsers);
 	const page = Number(req.query.page);
+	const countUsers = Number(req.query.size);
 	const head = (page - 1) * countUsers;
 	console.log(page + " " + countUsers);
 	let scorelist = Object.values(users).sort((l, r) => r.score - l.score);
