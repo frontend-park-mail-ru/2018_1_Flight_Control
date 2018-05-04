@@ -11,88 +11,94 @@ pug_html = pug_html + (pug_escape(null == (pug_interp = '№') ? "" : pug_interp
 ;pug_debug_line = 4;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
 pug_html = pug_html + "\u003Cth\u003E";
 ;pug_debug_line = 4;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
-pug_html = pug_html + (pug_escape(null == (pug_interp = 'Nickname') ? "" : pug_interp)) + "\u003C\u002Fth\u003E";
+pug_html = pug_html + (pug_escape(null == (pug_interp = 'Email') ? "" : pug_interp)) + "\u003C\u002Fth\u003E";
 ;pug_debug_line = 5;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
 pug_html = pug_html + "\u003Cth\u003E";
 ;pug_debug_line = 5;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
-pug_html = pug_html + (pug_escape(null == (pug_interp = 'Score') ? "" : pug_interp)) + "\u003C\u002Fth\u003E";
+pug_html = pug_html + (pug_escape(null == (pug_interp = 'Имя') ? "" : pug_interp)) + "\u003C\u002Fth\u003E";
 ;pug_debug_line = 6;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
 pug_html = pug_html + "\u003Cth\u003E";
 ;pug_debug_line = 6;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
-pug_html = pug_html + (pug_escape(null == (pug_interp = 'Victories') ? "" : pug_interp)) + "\u003C\u002Fth\u003E";
+pug_html = pug_html + (pug_escape(null == (pug_interp = 'Счет') ? "" : pug_interp)) + "\u003C\u002Fth\u003E";
 ;pug_debug_line = 7;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
 pug_html = pug_html + "\u003Cth\u003E";
 ;pug_debug_line = 7;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
-pug_html = pug_html + (pug_escape(null == (pug_interp = 'Rang') ? "" : pug_interp)) + "\u003C\u002Fth\u003E\u003C\u002Fthead\u003E";
+pug_html = pug_html + (pug_escape(null == (pug_interp = 'Победы') ? "" : pug_interp)) + "\u003C\u002Fth\u003E";
 ;pug_debug_line = 8;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
-pug_html = pug_html + "\u003Ctbody\u003E";
+pug_html = pug_html + "\u003Cth\u003E";
+;pug_debug_line = 8;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
+pug_html = pug_html + (pug_escape(null == (pug_interp = 'Рейтинг') ? "" : pug_interp)) + "\u003C\u002Fth\u003E\u003C\u002Fthead\u003E";
 ;pug_debug_line = 9;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
+pug_html = pug_html + "\u003Ctbody\u003E";
+;pug_debug_line = 10;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
 // iterate data.leaders
 ;(function(){
   var $$obj = data.leaders;
   if ('number' == typeof $$obj.length) {
-      for (var index = 0, $$l = $$obj.length; index < $$l; index++) {
-        var value = $$obj[index];
-;pug_debug_line = 10;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
+      for (var indexOfLeaders = 0, $$l = $$obj.length; indexOfLeaders < $$l; indexOfLeaders++) {
+        var value = $$obj[indexOfLeaders];
+;pug_debug_line = 11;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
 pug_html = pug_html + "\u003Ctr class=\"scoreboard__row\"\u003E";
-;pug_debug_line = 11;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
+;pug_debug_line = 12;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
 pug_html = pug_html + "\u003Ctd\u003E";
-;pug_debug_line = 11;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
+;pug_debug_line = 12;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
+pug_html = pug_html + (pug_escape(null == (pug_interp = indexOfLeaders + 1) ? "" : pug_interp)) + "\u003C\u002Ftd\u003E";
+;pug_debug_line = 13;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
+pug_html = pug_html + "\u003Ctd\u003E";
+;pug_debug_line = 13;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
 pug_html = pug_html + (pug_escape(null == (pug_interp = value.email) ? "" : pug_interp)) + "\u003C\u002Ftd\u003E";
-;pug_debug_line = 12;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
+;pug_debug_line = 14;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
 pug_html = pug_html + "\u003Ctd\u003E";
-;pug_debug_line = 12;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
+;pug_debug_line = 14;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
 pug_html = pug_html + (pug_escape(null == (pug_interp = value.name) ? "" : pug_interp)) + "\u003C\u002Ftd\u003E";
-;pug_debug_line = 13;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
-pug_html = pug_html + "\u003Ctd\u003E";
-;pug_debug_line = 13;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
-pug_html = pug_html + (pug_escape(null == (pug_interp = value.rate) ? "" : pug_interp)) + "\u003C\u002Ftd\u003E";
-;pug_debug_line = 14;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
-pug_html = pug_html + "\u003Ctd\u003E";
-;pug_debug_line = 14;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
-pug_html = pug_html + (pug_escape(null == (pug_interp = value.rate) ? "" : pug_interp)) + "\u003C\u002Ftd\u003E";
 ;pug_debug_line = 15;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
 pug_html = pug_html + "\u003Ctd\u003E";
+;pug_debug_line = 15;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
+pug_html = pug_html + (pug_escape(null == (pug_interp = value.rate) ? "" : pug_interp)) + "\u003C\u002Ftd\u003E";
 ;pug_debug_line = 16;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
-for (var index = 0; index < value.rate; index++)
-{
+pug_html = pug_html + "\u003Ctd\u003E";
+;pug_debug_line = 16;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
+pug_html = pug_html + (pug_escape(null == (pug_interp = value.rate) ? "" : pug_interp)) + "\u003C\u002Ftd\u003E";
 ;pug_debug_line = 17;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
-pug_html = pug_html + "\u003Ci class=\"fas fa-star\"\u003E\u003C\u002Fi\u003E";
-}
-pug_html = pug_html + "\u003C\u002Ftd\u003E\u003C\u002Ftr\u003E";
+pug_html = pug_html + "\u003Ctd\u003E";
+;pug_debug_line = 18;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
+for (var index = 0; index < value.rate; index++)
+;pug_debug_line = 19;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
+pug_html = pug_html + "\u003Ci class=\"fas fa-star\"\u003E\u003C\u002Fi\u003E\u003C\u002Ftd\u003E\u003C\u002Ftr\u003E";
       }
   } else {
     var $$l = 0;
-    for (var index in $$obj) {
+    for (var indexOfLeaders in $$obj) {
       $$l++;
-      var value = $$obj[index];
-;pug_debug_line = 10;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
+      var value = $$obj[indexOfLeaders];
+;pug_debug_line = 11;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
 pug_html = pug_html + "\u003Ctr class=\"scoreboard__row\"\u003E";
-;pug_debug_line = 11;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
+;pug_debug_line = 12;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
 pug_html = pug_html + "\u003Ctd\u003E";
-;pug_debug_line = 11;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
+;pug_debug_line = 12;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
+pug_html = pug_html + (pug_escape(null == (pug_interp = indexOfLeaders + 1) ? "" : pug_interp)) + "\u003C\u002Ftd\u003E";
+;pug_debug_line = 13;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
+pug_html = pug_html + "\u003Ctd\u003E";
+;pug_debug_line = 13;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
 pug_html = pug_html + (pug_escape(null == (pug_interp = value.email) ? "" : pug_interp)) + "\u003C\u002Ftd\u003E";
-;pug_debug_line = 12;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
+;pug_debug_line = 14;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
 pug_html = pug_html + "\u003Ctd\u003E";
-;pug_debug_line = 12;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
+;pug_debug_line = 14;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
 pug_html = pug_html + (pug_escape(null == (pug_interp = value.name) ? "" : pug_interp)) + "\u003C\u002Ftd\u003E";
-;pug_debug_line = 13;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
-pug_html = pug_html + "\u003Ctd\u003E";
-;pug_debug_line = 13;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
-pug_html = pug_html + (pug_escape(null == (pug_interp = value.rate) ? "" : pug_interp)) + "\u003C\u002Ftd\u003E";
-;pug_debug_line = 14;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
-pug_html = pug_html + "\u003Ctd\u003E";
-;pug_debug_line = 14;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
-pug_html = pug_html + (pug_escape(null == (pug_interp = value.rate) ? "" : pug_interp)) + "\u003C\u002Ftd\u003E";
 ;pug_debug_line = 15;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
 pug_html = pug_html + "\u003Ctd\u003E";
+;pug_debug_line = 15;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
+pug_html = pug_html + (pug_escape(null == (pug_interp = value.rate) ? "" : pug_interp)) + "\u003C\u002Ftd\u003E";
 ;pug_debug_line = 16;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
-for (var index = 0; index < value.rate; index++)
-{
+pug_html = pug_html + "\u003Ctd\u003E";
+;pug_debug_line = 16;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
+pug_html = pug_html + (pug_escape(null == (pug_interp = value.rate) ? "" : pug_interp)) + "\u003C\u002Ftd\u003E";
 ;pug_debug_line = 17;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
-pug_html = pug_html + "\u003Ci class=\"fas fa-star\"\u003E\u003C\u002Fi\u003E";
-}
-pug_html = pug_html + "\u003C\u002Ftd\u003E\u003C\u002Ftr\u003E";
+pug_html = pug_html + "\u003Ctd\u003E";
+;pug_debug_line = 18;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
+for (var index = 0; index < value.rate; index++)
+;pug_debug_line = 19;pug_debug_filename = "..\u002Fdata\u002Fjs\u002Fcomponents\u002FScoreboard\u002Fscoreboard.tmpl.pug";
+pug_html = pug_html + "\u003Ci class=\"fas fa-star\"\u003E\u003C\u002Fi\u003E\u003C\u002Ftd\u003E\u003C\u002Ftr\u003E";
     }
   }
 }).call(this);

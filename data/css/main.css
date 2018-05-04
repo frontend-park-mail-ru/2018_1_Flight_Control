@@ -1,7 +1,5 @@
-@import url("https://fonts.googleapis.com/css?family=Merienda:700");
 @import url("./system-font.css");
 @import url("../js/components/Scoreboard/Scoreboard.css");
-
 
 html, body {
 	width: 100%;

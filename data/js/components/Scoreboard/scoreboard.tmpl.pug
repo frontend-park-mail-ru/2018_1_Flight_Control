@@ -1,17 +1,24 @@
 table.scoreboard__table
-	thead
-		th='№'
-		th='Имя'
-		th='Счет'
-		th='Победы'
-		th='Рейтинг'
-	tbody
-		each value, index in data.leaders
-			tr.scoreboard__row
-				td= value.email
-				td= value.name
-				td= value.rate
-				td= value.rate
-				td
-					- for (var index = 0; index < value.rate; index++)
-						i.fas.fa-star
+    thead
+        th='№'
+        th='Email'
+        th='Имя'
+        th='Счет'
+        th='Победы'
+        th='Рейтинг'
+    tbody
+        each value, indexOfLeaders in data.leaders
+            tr.scoreboard__row
+                td= indexOfLeaders + 1
+                td= value.email
+                td= value.name
+                td= value.rate
+                td= value.rate
+                td
+                    - for (var index = 0; index < value.rate; index++)
+                    i.fas.fa-star
+//- Avatar image can be loaded at the first column
+//- instead of stars implement loading game military rank image
+//- @todo Find military rank images
+//- @todo Place here img tag
+//- @todo Catch default case when the image is not setted
