@@ -4,6 +4,9 @@
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
+## Pug files filter
+*.tmpl.js
+
 ## Build generated
 build/
 DerivedData/
