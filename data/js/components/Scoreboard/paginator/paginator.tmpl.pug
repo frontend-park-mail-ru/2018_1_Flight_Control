@@ -1,58 +1,64 @@
+-
+ var paginatorName = 'paginator-link';
+ var leftArrowClass = 'scoreboard__paginator-left';
+ var rightArrowClass = 'scoreboard__paginator-right';
+ var linkClass = 'scoreboard__paginator-link';
+
 
 if (page > 1)
-	a(href='' class='scoreboard__paginator-left' name='paginator-link' value=page - 1)= '<'
+    a(href='' class=leftArrowClass name=paginatorName value=page - 1)= '<'
 
 
 case page
-	when 1
-		- var i = 1;
-		- var tailpage = 1;
-		- var points = '';
-		if (1 + step < count)
-			- tailpage = step + 1;
-			- points = '...';
-		else
-			- tailpage = count - 1;
-		while i <= tailpage
-			a(href='' class='scoreboard__paginator-link' name='paginator-link')= i++
-		i= points
-		a(href='' class='scoreboard__paginator-link' name='paginator-link')= count
+    when 1
+        - var i = 1;
+        - var tailpage = 1;
+        - var points = '';
+        if (1 + step < count)
+            - tailpage = step + 1;
+            - points = '...';
+        else
+            - tailpage = count - 1;
+        while i <= tailpage
+            a(href='' class = linkClass name = paginatorName)= i++
+        i= points
+        a(href='' class = linkClass name = paginatorName)= count
 
-	when count
-		- var headpage = 1;
-		if (1 + step < count)
-			- headpage = count - step;
-			a(href='' class='scoreboard__paginator-link' name='paginator-link')= 1
-			|...
-		else
-			- headpage = 1;
-		while headpage <= count
-			a(href='' class='scoreboard__paginator-link' name='paginator-link')= headpage++
+    when count
+        - var headpage = 1;
+        if (1 + step < count)
+            - headpage = count - step;
+            a(href='' class = linkClass name = paginatorName)= 1
+            |...
+        else
+            - headpage = 1;
+        while headpage <= count
+            a(href='' class = linkClass name = paginatorName)= headpage++
 
-	default
-		if (page - 1 > step)
-			a(href='' class='scoreboard__paginator-link' name='paginator-link')= 1
-			|...
-			- var i = page - step;
-			while i <= page
-				a(href='' class='scoreboard__paginator-link' name='paginator-link')= i++
-		else
-			- var i = 1;
-			while i <= page
-				a(href='' class='scoreboard__paginator-link' name='paginator-link')= i++
+    default
+        if (page - 1 > step)
+            a(href='' class = linkClass name = paginatorName)= 1
+            |...
+            - var i = page - step;
+            while i <= page
+                a(href='' class = linkClass name = paginatorName)= i++
+        else
+            - var i = 1;
+            while i <= page
+                a(href='' class = linkClass name = paginatorName)= i++
 
-		if (count - page > step)
-			-var i = page + 1;
-			while i <= page + step
-				a(href='' class='scoreboard__paginator-link' name='paginator-link')= i++
-			|...
-			a(href='' class='scoreboard__paginator-link' name='paginator-link')= count
-		else
-			-var i = page + 1;
-			while i <= count
-				a(href='' class='scoreboard__paginator-link' name='paginator-link')= i++
+        if (count - page > step)
+            -var i = page + 1;
+            while i <= page + step
+                a(href='' class = linkClass name = paginatorName)= i++
+            |...
+            a(href='' class = linkClass name = paginatorName)= count
+        else
+            -var i = page + 1;
+            while i <= count
+                a(href='' class = linkClass name = paginatorName)= i++
 
 
 if (page < count)
-	a(href='' class='scoreboard__paginator-right' name='paginator-link' value=page + 1)= '>'
+    a(href='' class=rightArrowClass name = paginatorName value=page + 1)= '>'
 

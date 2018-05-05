@@ -60,7 +60,7 @@ const users = {
         username: '20asda',
         score: 72,
         avatar: 'default.jpg',
-    }
+    },
 };
 const ids = {};
 
@@ -97,12 +97,15 @@ app.post('/register', function(req, res) {
     };
     ids[id] = email;
     users[email] = user;
-
-    res.cookie('frontend', id, {expires: new Date(Date.now() + 1000 * 60 * 10)});
+    res.cookie(
+        'frontend',
+        id,
+        {expires: new Date(Date.now() + 1000 * 60 * 10)}
+    );
     res.status(201).json({id});
 });
 
-app.post('/authenticate', function (req, res) {
+app.post('/authenticate', function(req, res) {
     console.log(req.body.pass);
     const password = req.body.pass;
     const email = req.body.email;
@@ -115,12 +118,15 @@ app.post('/authenticate', function (req, res) {
 
     const id = uuid();
     ids[id] = email;
-
-    res.cookie('frontend', id, {expires: new Date(Date.now() + 1000 * 60 * 10)});
+    res.cookie(
+        'frontend',
+        id,
+        {expires: new Date(Date.now() + 1000 * 60 * 10)}
+    );
     res.status(201).json({id});
 });
 
-app.get('/get', function (req, res) {
+app.get('/get', function(req, res) {
     const id = req.cookies['frontend'];
     const email = ids[id];
     if (!email || !users[email]) {

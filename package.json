@@ -6,7 +6,9 @@
   "scripts": {
     "start": "DEBUG=mylogger node server",
     "start-api": "PORT=3000 DEBUG=mylogger node server",
-    "start:raw": "node server"
+    "start:raw": "node server",
+    "compile": "node server/compileTmpl.js",
+    "documentation": "bash documentation/docGenerator.sh"
   },
   "contributors": [
     "Alexandr Movsesov",

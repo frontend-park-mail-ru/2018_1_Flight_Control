@@ -7,7 +7,7 @@ const pug = require('pug');
 /**
  * @type {string} folder contains template source and output rendering function
  */
-const PATH = '../data/js/components/';
+const PATH = 'data/js/components/';
 
 /**
  * Compiles template and write it at the path param

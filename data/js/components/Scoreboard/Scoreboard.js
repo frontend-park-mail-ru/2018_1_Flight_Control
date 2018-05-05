@@ -1,3 +1,4 @@
+'use strict';
 (function() {
     /**
      * this class creates scoreboard html from scoreboard pug compiled template
@@ -43,7 +44,6 @@
             if (!this._data) {
                 return;
             }
-
             const data = {'data': this._data};
             this._el.innerHTML = generateScoreboard(data);
         }
