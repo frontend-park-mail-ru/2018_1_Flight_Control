@@ -47,7 +47,7 @@
             if (count !== 0) {
                 count = Math.ceil(this._length / countOnPage);
             }
-            const data = {page:page, count:count, step:step};
+            const data = {page: page, count: count, step: step};
             let template = generatePaginator(data);
             this._el.innerHTML = template;
             const paginatorLinks = document.getElementsByClassName('scoreboard__paginator-link');
