@@ -5,7 +5,6 @@
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
 ## Pug files filter
-*.tmpl.js
 
 ## Build generated
 build/
@@ -561,3 +560,4 @@ bh_unicode_properties.cache
 GitHub.sublime-settings
 
 package-lock.json
+*.tmpl.js
