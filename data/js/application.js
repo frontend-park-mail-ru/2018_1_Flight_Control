@@ -162,8 +162,7 @@ const linksByType = {
  * Server that has cors configuration for https://flightcontrolfrontend.herokuapp.com
  * @type {string}
  */
-// const baseUrl = 'https://flightcontrol.herokuapp.com' + linkToIp;
-const baseUrl = 'http://localhost:8080' + linkToIp;
+const baseUrl = 'https://flightcontrol.herokuapp.com' + linkToIp;
 
 /**
  * Map of section elements
