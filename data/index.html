@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Control</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" integrity="sha384-v2Tw72dyUXeU3y4aM2Y0tBJQkGfplr39mxZqlTBDUZAb9BGoC40+rdFCG0m10lXk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" integrity="sha384-q3jl8XQu1OpdLgGFvNRnPdj5VIlCvgsDQTQB6owSOHWlAurxul7f+JpUOVdAiJ5P" crossorigin="anonymous">
+</head>
+<body>
+<main id="application">
+    <div class="header">
+        <h1 class="game_name">Flight Control</h1>
+    </div>
+    <div class="content">
+        <section id="menu">
+            <ul>
+                <li id="start-link"><a href="#" class="main_btn disable_btn" data-section="start">Start</a></li>
+                <li id="profile-link"><a href="#" class="main_btn" data-section="profile">Profile</a></li>
+                <li id="logout-link"><a href="#" class="main_btn" data-section="logout">Logout</a></li>
+                <li id="signup-link"><a href="#" class="main_btn" data-section="signup">Registration</a></li>
+                <li id="signin-link"><a href="#" class="main_btn" data-section="signin">Login</a></li>
+                <li id="scoreboard-link"><a href="#" class="main_btn" data-section="scoreboard">Scoreboard</a></li>
+                <li id="about-link"><a href="#" class="main_btn" data-section="about">About</a></li>
+            </ul>
+        </section>
+
+        <section id="start" hidden="true">
+            <h1>Select game</h1>
+            <a href="#" data-section="menu">Back</a>
+        </section>
+
+        <section id="about" hidden="true" class="content-box">
+            <a href="#" data-section="menu" class="back_btn"><i class="fa fa-arrow-left"></i></a>
+            <br/>
+
+            <h1>About</h1>
+            <span>This game presents an airplane management.</span>
+        </section>
+
+        <section id="profile" hidden="true" class="content-box">
+            <a href="#" data-section="menu" class="back_btn"><i class="fas fa-arrow-left"></i></a>
+            <h1>Profile</h1>
+            <table>
+                <tr>
+                    <td><img id="profile-avatar" width="100" height="auto"><br></td>
+                </tr>
+                <tr>
+                    <td>Username: <nobr id="profile-username"></nobr><br></td>
+                </tr>
+                <tr>
+                    <td>Email: <nobr id="profile-email"></nobr><br></td>
+                </tr>
+                <tr>
+                    <td>Score: <nobr id="profile-score"></nobr><br></td>
+                </tr>
+            </table>
+            <form class="js-profile-form">
+                <div id="validation_profile"></div>
+                <a href="#" id='change-profile-form' data-section="hide-profile-form">change profile</a>
+                <div id="profile-form" hidden="true">
+                    <input required autocomplete="email" type="email" name="email" id="email2" placeholder="input you email here..">
+                    <br/>
+                    <input required autocomplete="off" type="text" name="username" id="username2" placeholder="input you username here..">
+                    <br/>
+                    <input required autocomplete="off" type="password" name="password" id="password2" placeholder="***********">
+                    <br/>
+                    <input required autocomplete="off" type="password" name="password_repeat" id="password_repeat2" placeholder="***********">
+                    <br/>
+                    <input type="file" name="img" id="img-change-profile" placeholder="path" accept="image/jpeg,image/png"/>
+                    <br/>
+                    <input class="js-profile-submit" type="submit">
+                </div>
+            </form>
+        </section>
+
+        <section id="profileHidden" hidden="true" class="profile-box">
+            <div class="row main_header">
+                <h1>Личный кабинет: <nobr id="profile-username">Василий</nobr></h1>
+            </div>
+            <div class="row profile-header">
+                <div class="col-3">
+                    <h1  class="profile_header_title">Аватар</h1>
+                    <img width="100%" src="img/avatar.jpg">
+                </div>
+                <div class="col-5">
+                    <h1 class="profile_header_title">Рейтинг</h1>
+                    <div class="row justify-span">
+                        <span class="profile_text">В таблице рейтинга:</span>
+                        &nbsp;
+                        <span class="profile_text balloon">5</span>
+                        &nbsp;
+                        <span class="profile_text">место</span>
+                    </div>
+                    <hr/>
+                    <div class="row justify-span">
+                        <span class="profile_text balloon">10.000</span>
+                        &nbsp;
+                        <span class="profile_text">очков</span>
+                    </div>
+                    <hr/>
+                    <div class="row justify-span">
+                        <span class="profile_text balloon">20/30</span>
+                        &nbsp;
+                        <span class="profile_text">побед</span>
+                    </div>
+                    <hr/>
+                    <h1 class="profile_header_title">Звание</h1>
+                    <div class="row justify-span" >
+                        <img id="rank" width="35%" src="img/captain_rank.png">
+                    </div>
+                    <div class="row justify-span">
+                        <span class="profile_text">Полковник</span>
+                    </div>
+                </div>
+            </div>
+            <hr/>
+            <div style="width: 100%;display:flex;justify-content:space-around;flex-direction:row">
+                <ul style="width:30%">
+                    <li><a class="profile_btn profile_success_field" href="#" data-section="start"><span class="menu_link">Одиночная игра</span></a></li>
+                    <li><a class="profile_btn profile_success_field" href="#" data-section="start"><span class="menu_link">Мультиплеер</span></a></li>
+                    <li><a class="profile_btn" href="#" data-section="signin"><span class="menu_link">Таблица лидеров</span></a></li>
+                </ul>
+                <ul style="width:30%">
+                    <li><a class="profile_btn" href="#" data-section="about"><span class="menu_link">Инструкция</span></a></li>
+                    <li><a class="profile_btn" href="#" data-section="about"><span class="menu_link">Редактировать</span></a></li>
+                    <li><a class="profile_btn warning_field" href="#" data-section="signup"><span class="menu_link">Выйти</span></a></li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="signup" hidden="true" class="content-box">
+            <a href="#" data-section="menu" class="back_btn"><i class="fas fa-arrow-left"></i></a>
+            <h1>Registration</h1>
+            <form class="js-signup-form">
+                <div id="validation_signup"></div>
+                <div class="input_field">
+                    <label for="email_reg">E-mail:</label>
+                    <input id="email_reg" required autocomplete="email" type="email" name="email" id="email" placeholder="input you email here..">
+                </div>
+                <div class="input_field">
+                    <label for="username_reg">Username:</label>
+                    <input id="username_reg" required autocomplete="off" type="text" name="username" id="username" placeholder="input you username here..">
+                </div>
+                <div class="input_field">
+                    <label for="pass_reg">Password:</label>
+                    <input id="pass_reg" required autocomplete="off" type="password" name="password" id="password" placeholder="***********">
+                </div>
+                <div class="input_field">
+                    <label for="repass_reg">Repeat password:</label>
+                    <input id="repass_reg" required autocomplete="off" type="password" name="password_repeat" id="password_repeat" placeholder="***********">
+                </div>
+                <div class="input_field">
+                    <label for="img-signup">Upload an image:</label>
+                    <input id="img-signup" autocomplete="off" type="file" name="img" >
+                </div>
+                <input class="submit_field success_field js-signup-submit" type="submit" value="Submit">
+            </form>
+        </section>
+
+
+        <section id="signin" hidden="true" class="content-box">
+            <a href="#" data-section="menu" class="back_btn"><i class="fas fa-arrow-left"></i></a>
+            <h1>Login</h1>
+            <form class="js-signin-form">
+                <div id="validation_signin"></div>
+                <div class="input_field">
+                    <label for="email_in">E-mail:</label>
+                    <input id="email_in" required autocomplete="email" type="email" name="email" id="email1" placeholder="input email here...">
+                </div>
+                <div class="input_field">
+                    <label for="pass_in">Password:</label>
+                    <input id="pass_in" required autocomplete="off" type="password" name="password" id="password1" placeholder="***********">
+                </div>
+                <input required class="submit_field success_field js-signin-submit" type="submit" value="Submit">
+            </form>
+        </section>
+
+        <section id="scoreboard" hidden="true" class="content-box">
+            <a href="#" data-section="menu" class="back_btn"><i class="fas fa-arrow-left"></i></a>
+            <h1>Leaderboard</h1>
+            <div class="js-scoreboard-table"></div>
+            <div class="js-scoreboard_paginator"></div>
+        </section>
+    </div>
+</main>
+
+<script src="/js/modules/http.js"></script>
+<script src="/js/modules/cookie.js"></script>
+<script src="/js/components/Scoreboard/scoreboard.tmpl.js"></script>
+<script src="/js/components/Scoreboard/Scoreboard.js"></script>
+<script src="/js/components/Scoreboard/paginator/paginator.tmpl.js"></script>
+<script src="/js/components/Scoreboard/paginator/paginator.js"></script>
+<script src="/js/application.js"></script>
+</body>
+</html>

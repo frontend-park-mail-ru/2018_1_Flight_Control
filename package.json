@@ -1,0 +1,34 @@
+{
+  "name": "Flight_control",
+  "version": "0.1.0",
+  "description": "Online browser game about airplane management, developed in collaboration with students of Technopark",
+  "main": "index.js",
+  "scripts": {
+    "start": "DEBUG=mylogger node server",
+    "start-api": "PORT=3000 DEBUG=mylogger node server",
+    "start:raw": "node server",
+    "compile": "node server/compileTmpl.js",
+    "documentation": "bash documentation/docGenerator.sh"
+  },
+  "contributors": [
+    "Alexandr Movsesov",
+    "Alex Kuznetsov",
+    "Sergey Malyshev"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "debug": "^3.1.0",
+    "express": "^4.16.3",
+    "morgan": "^1.9.0",
+    "npm": "^5.8.0",
+    "uuid": "^3.2.1",
+    "uuid.v4": "^1.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-google": "^0.9.1",
+    "pug": "^2.0.3"
+  }
+}

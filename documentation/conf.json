@@ -1,0 +1,7 @@
+{
+  "source": {
+    "include": ["data/js"],
+    "includePattern": ".+\\.js(doc|x)?$",
+    "excludePattern": ".+\\.(css|tmpl.js|tmpl.pug)"
+  }
+}
