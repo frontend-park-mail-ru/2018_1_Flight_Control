@@ -315,3 +315,12 @@ button {
 	border: 1px solid black;
 	background-color: rgba(71, 134, 155, 0.8);
 }
+#scoreboard div.js-scoreboard_paginator a.scoreboard__paginator-active-link {
+    padding: 5px;
+    margin: 2px;
+    border: 2px solid black;
+    background-color: rgba(106, 143, 155, 0.8);
+}
+.disable_btn {
+    pointer-events: none;
+}

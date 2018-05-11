@@ -48,9 +48,9 @@
                 count = Math.ceil(this._length / countOnPage);
             }
             const data = {page: page, count: count, step: step};
-            let template = generatePaginator(data);
-            this._el.innerHTML = template;
-            const paginatorLinks = document.getElementsByClassName('scoreboard__paginator-link');
+            this._el.innerHTML = generatePaginator(data);
+            const paginatorLinks =
+                document.getElementsByClassName('scoreboard__paginator-link');
             Array.prototype.forEach.call(paginatorLinks, (paginatorLink) => {
                 paginatorLink.addEventListener('click', (evt) => {
                     evt.preventDefault();
@@ -59,14 +59,16 @@
                     callback(value, countOnPage, step);
                 });
             });
-            const arrowLeft = document.getElementsByClassName('scoreboard__paginator-left');
+            const arrowLeft =
+                document.getElementsByClassName('scoreboard__paginator-left');
             if (arrowLeft.length !== 0) {
                 arrowLeft[0].addEventListener('click', (evt) => {
                     evt.preventDefault();
                     callback(page - 1, countOnPage, step);
                 });
             }
-            const arrowRight = document.getElementsByClassName('scoreboard__paginator-right');
+            const arrowRight =
+                document.getElementsByClassName('scoreboard__paginator-right');
             if (arrowRight.length !== 0) {
                 arrowRight[0].addEventListener('click', (evt) => {
                     evt.preventDefault();

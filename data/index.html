@@ -16,7 +16,7 @@
     <div class="content">
         <section id="menu">
             <ul>
-                <li id="start-link"><a href="#" class="main_btn" data-section="start">Start</a></li>
+                <li id="start-link"><a href="#" class="main_btn disable_btn" data-section="start">Start</a></li>
                 <li id="profile-link"><a href="#" class="main_btn" data-section="profile">Profile</a></li>
                 <li id="logout-link"><a href="#" class="main_btn" data-section="logout">Logout</a></li>
                 <li id="signup-link"><a href="#" class="main_btn" data-section="signup">Registration</a></li>
@@ -39,7 +39,43 @@
             <span>This game presents an airplane management.</span>
         </section>
 
-        <section id="profile" hidden="true" class="profile-box">
+        <section id="profile" hidden="true" class="content-box">
+            <a href="#" data-section="menu" class="back_btn"><i class="fas fa-arrow-left"></i></a>
+            <h1>Profile</h1>
+            <table>
+                <tr>
+                    <td><img id="profile-avatar" width="100" height="auto"><br></td>
+                </tr>
+                <tr>
+                    <td>Username: <nobr id="profile-username"></nobr><br></td>
+                </tr>
+                <tr>
+                    <td>Email: <nobr id="profile-email"></nobr><br></td>
+                </tr>
+                <tr>
+                    <td>Score: <nobr id="profile-score"></nobr><br></td>
+                </tr>
+            </table>
+            <form class="js-profile-form">
+                <div id="validation_profile"></div>
+                <a href="#" id='change-profile-form' data-section="hide-profile-form">change profile</a>
+                <div id="profile-form" hidden="true">
+                    <input required autocomplete="email" type="email" name="email" id="email2" placeholder="input you email here..">
+                    <br/>
+                    <input required autocomplete="off" type="text" name="username" id="username2" placeholder="input you username here..">
+                    <br/>
+                    <input required autocomplete="off" type="password" name="password" id="password2" placeholder="***********">
+                    <br/>
+                    <input required autocomplete="off" type="password" name="password_repeat" id="password_repeat2" placeholder="***********">
+                    <br/>
+                    <input type="file" name="img" id="img-change-profile" placeholder="path" accept="image/jpeg,image/png"/>
+                    <br/>
+                    <input class="js-profile-submit" type="submit">
+                </div>
+            </form>
+        </section>
+
+        <section id="profileHidden" hidden="true" class="profile-box">
             <div class="row main_header">
                 <h1>Личный кабинет: <nobr id="profile-username">Василий</nobr></h1>
             </div>
@@ -145,12 +181,13 @@
             <a href="#" data-section="menu" class="back_btn"><i class="fas fa-arrow-left"></i></a>
             <h1>Leaderboard</h1>
             <div class="js-scoreboard-table"></div>
-            <!--<div class="js-scoreboard_paginator"></div>-->
+            <div class="js-scoreboard_paginator"></div>
         </section>
     </div>
 </main>
 
 <script src="/js/modules/http.js"></script>
+<script src="/js/modules/cookie.js"></script>
 <script src="/js/components/Scoreboard/scoreboard.tmpl.js"></script>
 <script src="/js/components/Scoreboard/Scoreboard.js"></script>
 <script src="/js/components/Scoreboard/paginator/paginator.tmpl.js"></script>

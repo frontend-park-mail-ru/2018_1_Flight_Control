@@ -1,6 +1,7 @@
 table.scoreboard__table
     thead
         th='№'
+        th='Аватар'
         th='Email'
         th='Имя'
         th='Счет'
@@ -9,7 +10,13 @@ table.scoreboard__table
     tbody
         each value, indexOfLeaders in data.leaders
             tr.scoreboard__row
-                td= indexOfLeaders + 1
+                td= value.id + 1
+                if value.avatar
+                    td
+                        img(src=value.avatar width=100 height='auto')
+                else
+                    td
+                        img(src='/img/avatar.png' width=100 height='auto')
                 td= value.email
                 td= value.name
                 td= value.rate
