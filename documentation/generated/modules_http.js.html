@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: modules/http.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: modules/http.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>'use strict';
+/**
+ * HTTP module
+ * @module modules/http
+ */
+
+(function() {
+    /**
+     * Filters data by adding a csrf token if it exists
+     * @param{String} token
+     * @param {Object|FormData} formData
+     * @return {Object}
+     */
+    const csrfFilterTmpl = function(token = null, formData = null) {
+        if (token !== null) {
+            formData['token'] = token;
+        }
+        return formData;
+    };
+    /**
+     * Mutable binding filter for formData by passed token
+     * @type {function(String=, (Object|FormData)=): (Object|FormData)}
+     */
+    let csrfFilter = csrfFilterTmpl;
+    /**
+     * Empty object for headers substitution
+     * @type {Object}
+     */
+    const noop = () => {};
+    /**
+     * String of HTTP header for show json Content Type
+     * @type {Object}
+     */
+    const jsonHttpHeaders = {
+        'Content-Type': 'application/json; charset=utf-8',
+    };
+    /**
+     * check status response
+     * @param {Response} response
+     * @return {Response|Promise}
+     * @throws {Error} throw err if status not valid
+     */
+    function checkStatus(response) {
+        if (response.status >= 200 &amp;&amp; response.status &lt; 300) {
+            return response;
+        } else {
+            const error = new Error();
+            error.code = response.statusText;
+            error.body = response.text();
+            return Promise.reject(error);
+        }
+    }
+    /**
+     * Attach token for csrfFilter
+     * Detach if there is special key in response
+     * Uses in the promise chain
+     * @param {Promise|Response} response
+     * @throws {Error}
+     * @return {Promise|Response}
+     */
+    function assignToken(response) {
+        const isEmpty = Object.keys(response).length === 0;
+        if (!isEmpty &amp;&amp; 'token' in response) {
+            csrfFilter = csrfFilterTmpl;
+            csrfFilter = csrfFilter.bind(null, response['token']);
+        }
+        if (!isEmpty &amp;&amp; 'csrf' in response) {
+            csrfFilter = csrfFilterTmpl;
+            csrfFilter = csrfFilter.bind(null, null);
+        }
+        return response;
+    }
+    /**
+     * Test response on empty and convert to json
+     * if not empty response returns json otherwise return text promise
+     * @param {Response} response
+     * @return {Promise} Return promise
+     */
+    function json(response) {
+        const contentType = response.headers.get('content-type');
+        if (contentType &amp;&amp; contentType.indexOf('application/json') !== -1) {
+            return response.json();
+        } else {
+            return response.text();
+        }
+    }
+
+    /**
+     * Class create http module
+     */
+    class HttpModule {
+        /**
+         * binds csrf filter
+         * @constructor
+         */
+        constructor() {
+            csrfFilter = csrfFilter.bind(null, null);
+        }
+        /**
+         * Function HTTP get request
+         * @param {String} url
+         * @return {Promise&lt;Response>}
+         */
+        fetchGet({url = '/'} = {}) {
+            return fetch(url, {
+                method: 'GET',
+                headers: jsonHttpHeaders,
+                mode: 'cors',
+                credentials: 'include',
+            })
+                .then(checkStatus)
+                .then(json)
+                .catch( (error) => {
+                    throw error;
+                });
+        }
+        /**
+         * Returns fetched post request with params
+         * @param {String} url
+         * @param {Object} headers
+         * @param {Object} formData
+         * @return {Promise&lt;Response>}
+         */
+        makeFetchPost(url, headers, formData) {
+            return fetch(url, {
+                method: 'POST',
+                headers: headers,
+                mode: 'cors',
+                credentials: 'include',
+                body: formData,
+            });
+        }
+        /**
+         * Function HTTP post request for json or multipart request
+         * @param {String} url
+         * @param {Object|FormData} formData
+         * @example FormData case: content-type with boundary generates auto-ly
+         * @param {Boolean} multipart
+         * @return {Promise&lt;Response>}
+         */
+        fetchPost({url = '/', formData = {}, multipart = false}) {
+            formData = csrfFilter(formData);
+            const withData = formData !== {};
+            const headers = !multipart ? jsonHttpHeaders : noop();
+            formData = withData &amp;&amp; !multipart ?
+                JSON.stringify(formData) :
+                formData;
+            return this.makeFetchPost(url, headers, formData)
+                .then(checkStatus)
+                .then(json)
+                .then(assignToken)
+                .catch( (error) => {
+                    throw error;
+                });
+        }
+    }
+    window.HttpModule = HttpModule;
+})();
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-modules_http.html">modules/http</a></li></ul><h3>Classes</h3><ul><li><a href="module-modules_http-HttpModule.html">HttpModule</a></li><li><a href="PaginatorComponent.html">PaginatorComponent</a></li><li><a href="ScoreboardComponent.html">ScoreboardComponent</a></li></ul><h3>Global</h3><ul><li><a href="global.html#hiddenLinks">hiddenLinks</a></li><li><a href="global.html#logoutUser">logoutUser</a></li><li><a href="global.html#onLogout">onLogout</a></li><li><a href="global.html#openScoreboard">openScoreboard</a></li><li><a href="global.html#showLinks">showLinks</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat May 05 2018 18:13:52 GMT+0300 (MSK)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
